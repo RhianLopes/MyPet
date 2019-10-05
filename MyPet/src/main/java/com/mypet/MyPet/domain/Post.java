@@ -14,7 +14,7 @@ public class Post extends Domain{
 
     private List<Comment> comment;
 
-    private List<Like> like;
+    private List<Enjoy> enjoy;
 
     private String photos;
 

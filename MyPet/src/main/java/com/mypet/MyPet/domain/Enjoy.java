@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Like extends Domain {
+public class Enjoy extends Domain {
 
     private Pet pet;
 
