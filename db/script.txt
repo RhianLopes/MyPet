@@ -1,185 +1,133 @@
--- Gerado por Oracle SQL Developer Data Modeler 19.2.0.182.1216
---   em:        2019-10-03 10:40:25 BRT
---   site:      Oracle Database 12c
---   tipo:      Oracle Database 12c
-
-
-
 CREATE TABLE comment (
-    id        INTEGER NOT NULL,
-    pet_id    INTEGER NOT NULL,
-    post_id   INTEGER NOT NULL,
-    content   VARCHAR2(140) NOT NULL,
-    date    DATE NOT NULL
+    comment_id     BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    pet_id         BIGINT UNSIGNED NOT NULL,
+    post_id        BIGINT UNSIGNED NOT NULL,
+    content        VARCHAR(140) NOT NULL,
+    date           DATETIME NOT NULL,
+    active         BOOL NOT NULL,
+    PRIMARY KEY ( comment_id )
 );
-
-ALTER TABLE comment ADD CONSTRAINT comment_pk PRIMARY KEY ( id );
 
 CREATE TABLE event (
-    id            INTEGER NOT NULL,
-    pet_id        INTEGER NOT NULL,
-    name          VARCHAR2(100) NOT NULL,
-    description   VARCHAR2(280) NOT NULL,
-    latitude      NUMBER(10, 10) NOT NULL,
-    longitude     NUMBER(10, 10) NOT NULL
+    event_id      BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    pet_id        BIGINT UNSIGNED NOT NULL,
+    name          VARCHAR(100) NOT NULL,
+    description   VARCHAR(280) NOT NULL,
+    latitude      DOUBLE NOT NULL,
+    longitude     DOUBLE NOT NULL,
+    active        BOOL NOT NULL,
+    PRIMARY KEY ( event_id )
 );
-
-ALTER TABLE event ADD CONSTRAINT event_pk PRIMARY KEY ( id );
 
 CREATE TABLE follower (
-    id             INTEGER NOT NULL,
-    pet_follower   INTEGER NOT NULL,
-    pet_followed   INTEGER NOT NULL
+    follower_id    BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    pet_follower   BIGINT UNSIGNED NOT NULL,
+    pet_followed   BIGINT UNSIGNED NOT NULL,
+    active         BOOL NOT NULL,
+    PRIMARY KEY ( follower_id )
 );
 
-ALTER TABLE follower ADD CONSTRAINT follower_pk PRIMARY KEY ( id );
-
-CREATE TABLE like (
-    id        INTEGER NOT NULL,
-    pet_id    INTEGER NOT NULL,
-    post_id   INTEGER NOT NULL
-);
-
-ALTER TABLE like ADD CONSTRAINT like_pk PRIMARY KEY ( id );
+CREATE TABLE enjoy (
+    enjoy_id  BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    pet_id    BIGINT UNSIGNED NOT NULL,
+    post_id   BIGINT UNSIGNED NOT NULL,
+    active    BOOL NOT NULL,
+    PRIMARY KEY ( enjoy_id )
+); 
 
 CREATE TABLE notification (
-    id                INTEGER NOT NULL,
-    notified_pet_id   INTEGER NOT NULL,
-    recived_pet_id   INTEGER NOT NULL,
-    message           VARCHAR2(150) NOT NULL
+    notification_id   BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    notified_pet_id   BIGINT UNSIGNED NOT NULL,
+    recived_pet_id    BIGINT UNSIGNED NOT NULL,
+    message           VARCHAR(150) NOT NULL,
+    active            BOOL NOT NULL,
+	PRIMARY KEY ( notification_id )
 );
-
-ALTER TABLE notification ADD CONSTRAINT notification_pk PRIMARY KEY ( id );
 
 CREATE TABLE pet (
-    id            INTEGER NOT NULL,
-    user_id       INTEGER NOT NULL,
-    name          VARCHAR2(50) NOT NULL,
-    species       VARCHAR2(30) NOT NULL,
-    description   VARCHAR2(280),
-    genre         VARCHAR2(10) NOT NULL,
-    photo         VARCHAR2(1000) NOT NULL
+    pet_id        BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    user_id       BIGINT UNSIGNED NOT NULL,
+    name          VARCHAR(50) NOT NULL,
+    species       VARCHAR(30) NOT NULL,
+    description   VARCHAR(280),
+    genre         VARCHAR(10) NOT NULL,
+    photo         VARCHAR(1000) NOT NULL,
+    active        BOOL NOT NULL,
+    PRIMARY KEY ( pet_id )
 );
-
-ALTER TABLE pet ADD CONSTRAINT pet_pk PRIMARY KEY ( id );
 
 CREATE TABLE post (
-    id            INTEGER NOT NULL,
-    pet_id        INTEGER NOT NULL,
-    comment_id    INTEGER NOT NULL,
-    like_id       INTEGER NOT NULL,
-    photos        VARCHAR2(1000),
-    description   VARCHAR2(280) NOT NULL,
-    "DATE"        DATE NOT NULL
+    post_id       BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    pet_id        BIGINT UNSIGNED NOT NULL,
+    comment_id    BIGINT UNSIGNED NOT NULL,
+    enjoy_id      BIGINT UNSIGNED NOT NULL,
+    photos        VARCHAR(1000),
+    description   VARCHAR(280) NOT NULL,
+    DATE          DATETIME NOT NULL,
+    active        BOOL NOT NULL,
+	PRIMARY KEY ( post_id )
 );
-
-ALTER TABLE post ADD CONSTRAINT post_pk PRIMARY KEY ( id );
 
 CREATE TABLE user (
-    id         INTEGER NOT NULL,
-    name       VARCHAR2(100) NOT NULL,
-    nickname   VARCHAR2(50) NOT NULL,
-    email      VARCHAR2(100) NOT NULL,
-    password   VARCHAR2(80),
-    photo      VARCHAR2(1000)
+    user_id    BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    name       VARCHAR(100) NOT NULL,
+    nickname   VARCHAR(50) NOT NULL,
+    email      VARCHAR(100) NOT NULL,
+    password   VARCHAR(80) NOT NULL,
+    photo      VARCHAR(1000),
+    active     BOOL NOT NULL,
+    PRIMARY KEY ( user_id )
 );
 
-ALTER TABLE user ADD CONSTRAINT user_pk PRIMARY KEY ( id );
 
 ALTER TABLE comment
     ADD CONSTRAINT comment_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
 ALTER TABLE comment
     ADD CONSTRAINT comment_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
+        REFERENCES post ( post_id );
 
 ALTER TABLE event
     ADD CONSTRAINT event_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
 ALTER TABLE follower
     ADD CONSTRAINT followed_pet_fk FOREIGN KEY ( pet_followed )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
 ALTER TABLE follower
     ADD CONSTRAINT follower_pet_fk FOREIGN KEY ( pet_follower )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
-ALTER TABLE like
+ALTER TABLE enjoy
     ADD CONSTRAINT like_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
-ALTER TABLE like
+ALTER TABLE enjoy
     ADD CONSTRAINT like_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
+        REFERENCES post ( post_id );
 
 ALTER TABLE notification
     ADD CONSTRAINT notified_pet_fk FOREIGN KEY ( notified_pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
 ALTER TABLE pet
     ADD CONSTRAINT pet_user_fk FOREIGN KEY ( user_id )
-        REFERENCES "USER" ( id );
+        REFERENCES user ( user_id );
 
 ALTER TABLE post
     ADD CONSTRAINT post_comment_fk FOREIGN KEY ( comment_id )
-        REFERENCES comment ( id );
+        REFERENCES comment ( comment_id );
 
 ALTER TABLE post
-    ADD CONSTRAINT post_like_fk FOREIGN KEY ( like_id )
-        REFERENCES like ( id );
+    ADD CONSTRAINT post_like_fk FOREIGN KEY ( enjoy_id )
+        REFERENCES enjoy ( enjoy_id );
 
 ALTER TABLE post
     ADD CONSTRAINT post_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( pet_id );
 
 ALTER TABLE notification
     ADD CONSTRAINT recived_pet_fk FOREIGN KEY ( recived_pet_id )
-        REFERENCES pet ( id );
-
-
-
--- Relatório do Resumo do Oracle SQL Developer Data Modeler: 
--- 
--- CREATE TABLE                             8
--- CREATE INDEX                             0
--- ALTER TABLE                             21
--- CREATE VIEW                              0
--- ALTER VIEW                               0
--- CREATE PACKAGE                           0
--- CREATE PACKAGE BODY                      0
--- CREATE PROCEDURE                         0
--- CREATE FUNCTION                          0
--- CREATE TRIGGER                           0
--- ALTER TRIGGER                            0
--- CREATE COLLECTION TYPE                   0
--- CREATE STRUCTURED TYPE                   0
--- CREATE STRUCTURED TYPE BODY              0
--- CREATE CLUSTER                           0
--- CREATE CONTEXT                           0
--- CREATE DATABASE                          0
--- CREATE DIMENSION                         0
--- CREATE DIRECTORY                         0
--- CREATE DISK GROUP                        0
--- CREATE ROLE                              0
--- CREATE ROLLBACK SEGMENT                  0
--- CREATE SEQUENCE                          0
--- CREATE MATERIALIZED VIEW                 0
--- CREATE MATERIALIZED VIEW LOG             0
--- CREATE SYNONYM                           0
--- CREATE TABLESPACE                        0
--- CREATE USER                              0
--- 
--- DROP TABLESPACE                          0
--- DROP DATABASE                            0
--- 
--- REDACTION POLICY                         0
--- TSDP POLICY                              0
--- 
--- ORDS DROP SCHEMA                         0
--- ORDS ENABLE SCHEMA                       0
--- ORDS ENABLE OBJECT                       0
--- 
--- ERRORS                                   0
--- WARNINGS                                 0
+        REFERENCES pet ( pet_id );
