@@ -1,0 +1,8 @@
+DROP TABLE comment;
+DROP TABLE event;
+DROP TABLE follower; 
+DROP TABLE enjoy;
+DROP TABLE notification; 
+DROP TABLE pet;
+DROP TABLE post; 
+DROP TABLE user;
