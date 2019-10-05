@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Domain {
 
-    private int id;
+    private Long id;
 
-    private Active active;
+    private boolean isActive;
 }

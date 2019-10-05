@@ -1,15 +1,11 @@
 //package com.mypet.MyPet.security;
-//
-//import br.com.cwi.crescer.api.domain.Preferencia;
-//import br.com.cwi.crescer.api.domain.Usuario;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.mypet.MyPet.domain.User;
 //import lombok.*;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 //
-//import java.math.BigDecimal;
-//import java.time.LocalDate;
 //import java.util.Arrays;
 //import java.util.Collection;
 //import java.util.List;
@@ -17,65 +13,53 @@
 //
 //@Data
 //@Builder
-//@AllArgsConstructor
 //@NoArgsConstructor
 //@EqualsAndHashCode(of = "id")
 //public class UserPrincipal implements UserDetails {
 //
 //    private Long id;
 //
-//    private String nome;
+//    private String name;
+//
+//    private String nickname;
 //
 //    private String email;
 //
-//    private String foto;
-//
 //    @JsonIgnore
-//    private String senha;
+//    private String password;
 //
-//    private BigDecimal latitude;
+//    private String photo;
 //
-//    private BigDecimal longitude;
-//
-//    private Preferencia preferencia;
-//
-//    private boolean ativo;
-//
-//    private LocalDate dataNascimento;
+//    private boolean isActive;
 //
 //    private Collection<? extends GrantedAuthority> authorities;
 //
-//    public UserPrincipal(Long id, String nome, String email, String foto, String senha,
-//                         boolean ativo, BigDecimal longitude, BigDecimal latitude, Preferencia preferencia,
-//                         Collection<? extends GrantedAuthority> authorities) {
+//    public UserPrincipal(Long id, String name, String nickname, String email, String password, String photo,
+//                         boolean isActive, Collection<? extends GrantedAuthority> authorities) {
 //        this.id = id;
-//        this.nome = nome;
+//        this.name = name;
+//        this.nickname = nickname;
 //        this.email = email;
-//        this.foto = foto;
-//        this.senha = senha;
-//        this.longitude = longitude;
-//        this.latitude = latitude;
-//        this.preferencia = preferencia;
-//        this.ativo = ativo;
+//        this.password = password;
+//        this.photo = photo;
+//        this.isActive = isActive;
 //        this.authorities = authorities;
 //    }
 //
-//    public static UserPrincipal create(Usuario usuario) {
+//    public static UserPrincipal create(User user) {
 //
 //        List<GrantedAuthority> authorities = Arrays.asList(
-//                new SimpleGrantedAuthority(usuario.getPerfil().getRole())
+//                new SimpleGrantedAuthority(user.getProfile().getRole())
 //        );
 //
 //        return new UserPrincipal(
-//                usuario.getId(),
-//                usuario.getNome(),
-//                usuario.getEmail(),
-//                usuario.getFoto(),
-//                usuario.getSenha(),
-//                usuario.isAtivo(),
-//                usuario.getLongitude(),
-//                usuario.getLatitude(),
-//                usuario.getPreferencia(),
+//                user.getId(),
+//                user.getName(),
+//                user.getNickname(),
+//                user.getEmail(),
+//                user.getPassword(),
+//                user.getPhoto(),
+//                user.isActive(),
 //                authorities
 //        );
 //    }
@@ -87,24 +71,22 @@
 //    }
 //
 //    @Override
-//    @JsonIgnore
-//    public String getPassword() {
-//        return senha;
-//    }
+//    public Collection<? extends GrantedAuthority> getAuthorities() { return authorities; }
 //
 //    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return authorities;
+//    @JsonIgnore
+//    public String getPassword() {
+//        return password;
 //    }
 //
 //    @Override
 //    public boolean isAccountNonExpired() {
-//        return ativo;
+//        return isActive;
 //    }
 //
 //    @Override
 //    public boolean isAccountNonLocked() {
-//        return ativo;
+//        return isActive;
 //    }
 //
 //    @Override
@@ -114,7 +96,7 @@
 //
 //    @Override
 //    public boolean isEnabled() {
-//        return ativo;
+//        return isActive;
 //    }
 //
 //}

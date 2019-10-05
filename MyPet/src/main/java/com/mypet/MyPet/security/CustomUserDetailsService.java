@@ -1,7 +1,5 @@
 //package com.mypet.MyPet.security;
 //
-//import br.com.cwi.crescer.api.domain.Usuario;
-//import br.com.cwi.crescer.api.repository.UsuarioRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
