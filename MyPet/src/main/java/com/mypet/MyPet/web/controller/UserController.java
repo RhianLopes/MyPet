@@ -6,6 +6,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("public/api/api")
 public class UserController {
@@ -23,4 +25,18 @@ public class UserController {
     public void delete(@PathVariable("id") Long id){
         userRepository.delete(id);
     }
+
+    @PutMapping("/edit")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void update(@RequestBody User user){
+        userRepository.update(user);
+    }
+
+    @GetMapping("/find-all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
+
 }
