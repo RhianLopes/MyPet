@@ -1,48 +1,33 @@
 package com.mypet.MyPet.persistence;
 
 import com.mysql.jdbc.Connection;
-import lombok.Data;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@Data
 public class ConectionMySql {
 
-    private String ip;
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/MyPet?autoReconnect=true&useSSL=false";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String LOGIN = "root";
+    private static final String PASSWORD = "passofundo";
+    public static Connection connection;
 
-    private String port;
+    private ConectionMySql(){}
 
-    private String login;
-
-    private String password;
-
-    private String nameDB;
-
-    private Connection conection;
-
-    public ConectionMySql(String ip, String port, String login, String password, String nameDB) {
-        this.ip = ip;
-        this.port = port;
-        this.login = login;
-        this.password = password;
-        this.nameDB = nameDB;
-    }
-
-    public void openConection(){
+    public static void openConection(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url =  "jdbc:mysql://"+ip+":"+port+"/"+nameDB+"?autoReconnect=true&useSSL=false";
-            this.conection = (Connection) DriverManager.getConnection(url, login, password);
+            Class.forName(DRIVER);
+            ConectionMySql.connection = (Connection) DriverManager.getConnection(URL, LOGIN, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void closeConection(){
+    public static void closeConection(){
         try {
-            if(!this.conection.isClosed()){
-                this.conection.close();
+            if(!ConectionMySql.connection.isClosed()){
+                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

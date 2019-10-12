@@ -5,7 +5,7 @@ server:
 
 security:
   jwt:
-    secret: "crescer-2019-1-java-jwt"
+    secret: "my-pet-2019-java-jwt"
     expiration: 864000000
   public:
     path: "/public/**"
@@ -14,9 +14,6 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test
-    username:
-    password:
-  jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+
+data:
+  url: "jdbc:mysql://127.0.0.1:3306/MyPet?autoReconnect=true&useSSL=false"
