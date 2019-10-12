@@ -32,7 +32,7 @@ public class ConectionMySql {
     public void openConection(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url =  "jdbc:mysql://"+ip+":"+port+"/"+nameDB;
+            String url =  "jdbc:mysql://"+ip+":"+port+"/"+nameDB+"?autoReconnect=true&useSSL=false";
             this.conection = (Connection) DriverManager.getConnection(url, login, password);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

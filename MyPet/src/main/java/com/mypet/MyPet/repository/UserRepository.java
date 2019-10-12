@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserRepository {
 
-    private static ConectionMySql conectionMySql = new ConectionMySql("127.0.0.1", "3306", "root", "toor", "MyPet");
+    private static ConectionMySql conectionMySql = new ConectionMySql("127.0.0.1", "3306", "root", "passofundo", "MyPet");
 
     public static User register(User user){
         conectionMySql.openConection();

@@ -9,10 +9,11 @@ import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GenericRepository {
 
-    private static ConectionMySql conectionMySql = new ConectionMySql("127.0.0.1", "3306", "root", "toor", "MyPet");
+    private ConectionMySql conectionMySql = new ConectionMySql("127.0.0.1", "3306", "root", "passofundo", "MyPet");
 
     private Connection con;
     protected String tabela;
@@ -23,7 +24,8 @@ public abstract class GenericRepository {
         this.tabela = tabela;
     }
 
-    protected abstract void setStatementValues(PreparedStatement stmt, Object object) throws SQLException;
+    protected abstract void setStatementValuesToInsert(PreparedStatement stmt, Object object) throws SQLException;
+    protected abstract void setStatementValuesToUpdate(PreparedStatement stmt, Object object) throws SQLException;
     protected abstract Object createObject(ResultSet rs) throws SQLException;
 
     protected void setInsertSQL(String sql) {
@@ -34,10 +36,40 @@ public abstract class GenericRepository {
         this.updateSQL = sql;
     }
 
-    public void insert(Object object) {
+    public Object insert(Object object) {
+        conectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = (PreparedStatement) conectionMySql.getConection().prepareStatement(this.insertSQL);
-            this.setStatementValues(preparedStatement, object);
+            PreparedStatement preparedStatement = (PreparedStatement) conectionMySql.getConection().prepareStatement(insertSQL);
+            this.setStatementValuesToInsert(preparedStatement, object);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            this.treatException(ex);
+        } finally {
+            conectionMySql.closeConection();
+        }
+        return object;
+    }
+
+    public Object update(Object object) {
+        conectionMySql.openConection();
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) conectionMySql.getConection().prepareStatement(this.updateSQL);
+            this.setStatementValuesToUpdate(preparedStatement, object);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            this.treatException(ex);
+        } finally {
+            conectionMySql.closeConection();
+        }
+        return object;
+    }
+
+    public void delete(Long id) {
+        conectionMySql.openConection();
+        String sql = String.format("DELETE FROM %s WHERE id = ?", this.tabela);
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) conectionMySql.getConection().prepareStatement(sql);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             this.treatException(ex);
@@ -46,52 +78,47 @@ public abstract class GenericRepository {
         }
     }
 
-    public void update(Object object) {
-        try (PreparedStatement stmt = (PreparedStatement) this.con.prepareStatement(this.updateSQL)) {
-            this.setStatementValues(stmt, object);
-            stmt.execute();
-        } catch (SQLException ex) {
-            this.treatException(ex);
-        }
-    }
-
-    public void delete(Domain object) {
-        String sql = String.format("DELETE FROM %s WHERE id = ?", this.tabela);
-        try (PreparedStatement stmt = (PreparedStatement) this.con.prepareStatement(sql)) {
-            stmt.setLong(1, object.getId());
-            stmt.execute();
-        } catch (SQLException ex) {
-            this.treatException(ex);
-        }
-    }
-
     public Object find(int id) {
+        conectionMySql.openConection();
         String sql = String.format("SELECT * FROM %s WHERE id = ?", this.tabela);
-        try (PreparedStatement stmt = (PreparedStatement) this.con.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.execute();
-            return executeResultSet(stmt);
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) conectionMySql.getConection().prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            return executeResultSet(preparedStatement);
         } catch (SQLException ex) {
             this.treatException(ex);
             return null;
+        } finally {
+            conectionMySql.closeConection();
         }
     }
 
     @SuppressWarnings("rawtypes")
-    public ArrayList findAll() {
+    public ArrayList<Object> findAll() {
+        conectionMySql.openConection();
+        ArrayList<Object> listGeneric = new ArrayList<>();
         String sql = String.format("SELECT * FROM %s", this.tabela);
-        try (Statement stmt = (Statement) this.con.createStatement()) {
-            stmt.execute(sql);
-            ArrayList list = new ArrayList<>();
-            return executeResultSet(stmt, list);
+        try {
+            Statement preparedStatement = (Statement) conectionMySql.getConection().prepareStatement(sql);
+
+            ResultSet resultSet = preparedStatement.executeQuery(sql);
+
+            while(resultSet.next()){
+                this.createObject(resultSet);
+            }
         } catch (SQLException ex) {
             this.treatException(ex);
-            return null;
+        } finally {
+            conectionMySql.closeConection();
         }
+        return listGeneric;
     }
 
     private Object executeResultSet(PreparedStatement stmt) {
-        try (ResultSet rs = stmt.getResultSet()) {
+        conectionMySql.openConection();
+        try {
+            ResultSet rs = stmt.getResultSet();
             rs.next();
             return this.createObject(rs);
         } catch (Exception ex) {
@@ -102,7 +129,9 @@ public abstract class GenericRepository {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private ArrayList executeResultSet(Statement stmt, ArrayList list) {
-        try (ResultSet rs = stmt.getResultSet()) {
+        conectionMySql.openConection();
+        try {
+            ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 Object object = this.createObject(rs);
                 list.add(object);

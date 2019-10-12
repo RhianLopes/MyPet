@@ -9,42 +9,33 @@ import java.util.ArrayList;
 
 public abstract class GenericArrayListRepository extends GenericRepository {
 
-    protected ArrayList<Object> objects;
-
     public GenericArrayListRepository(String tabela) {
         super(tabela);
-        this.loadObjects();
     }
 
-    protected abstract void setStatementValues(PreparedStatement stmt, Object object) throws SQLException;
+    protected abstract void setStatementValuesToInsert(PreparedStatement stmt, Object object) throws SQLException;
+    protected abstract void setStatementValuesToUpdate(PreparedStatement stmt, Object object) throws SQLException;
     protected abstract Object createObject(ResultSet rs) throws SQLException;
     protected abstract Object convertObject(Object object);
-
-    @SuppressWarnings("unchecked")
-    protected void loadObjects() throws NullPointerException {
-        this.objects = super.findAll();
-    }
+    protected abstract ArrayList<Object> convertListObject(ArrayList<Object> object);
 
     @SuppressWarnings("rawtypes")
     protected ArrayList getObjects() {
-        return this.objects;
+        return super.findAll();
     }
 
     @Override
-    public void update(Object object) {
-        super.update(object);
-        this.loadObjects();
+    public Object update(Object object) {
+        return super.update(object);
     }
 
     @Override
-    public void delete(Domain object) {
-        super.delete(object);
-        this.loadObjects();
+    public void delete(Long id) {
+        super.delete(id);
     }
 
     @Override
-    public void insert(Object object) {
-        super.insert(object);
-        this.objects.add(this.convertObject(object));
+    public Object insert(Object object) {
+        return super.insert(object);
     }
 }
