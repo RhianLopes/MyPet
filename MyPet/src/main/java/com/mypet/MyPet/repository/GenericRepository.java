@@ -16,17 +16,16 @@ public abstract class GenericRepository {
     protected abstract void setStatementValuesToUpdate(PreparedStatement stmt, Object object) throws SQLException;
     protected abstract Object createObject(ResultSet rs) throws SQLException;
 
-    private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
-    private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM %s";
-    private static final String SELECT_ONE_SQL = "SELECT * FROM %s WHERE id = ?";
-
     protected String table;
     private String insertSQL;
     private String updateSQL;
+    private String deleteSQL;
+    private String inactivateSQL;
+    private String selectAllSQL;
+    private String selectOneSQL;
 
-    GenericRepository(String tabela) {
-        this.table = tabela;
+    GenericRepository(String table) {
+        this.table = table;
     }
 
     public Object insert(Object object) {
@@ -59,7 +58,6 @@ public abstract class GenericRepository {
 
     public void delete(Long id) {
         ConectionMySql.openConection();
-        String deleteSQL = String.format(DELETE_SQL, this.table);
         try {
             PreparedStatement preparedStatement = this.getPreparedStatement(deleteSQL);
             preparedStatement.setLong(1, id);
@@ -73,7 +71,6 @@ public abstract class GenericRepository {
 
     public void inactivate(Long id) {
         ConectionMySql.openConection();
-        String inactivateSQL = String.format(INACTIVATE_SQL, this.table);
         try {
             PreparedStatement preparedStatement = this.getPreparedStatement(inactivateSQL);
             preparedStatement.setLong(1, id);
@@ -88,7 +85,6 @@ public abstract class GenericRepository {
     public Object find( Long id) {
         ConectionMySql.openConection();
         Object objectResult = null;
-        String selectOneSQL = String.format(SELECT_ONE_SQL, this.table);
         try {
             PreparedStatement preparedStatement = this.getPreparedStatement(selectOneSQL);
             preparedStatement.setLong(1, id);
@@ -104,14 +100,12 @@ public abstract class GenericRepository {
         return objectResult;
     }
 
-    @SuppressWarnings("rawtypes")
     public ArrayList<Object> findAll() {
         ConectionMySql.openConection();
         ArrayList<Object> listObjectResult = new ArrayList<>();
-        String selectAllSQL = String.format(SELECT_ALL_SQL, this.table);
         try {
-            Statement statement = this.getStatement(selectAllSQL);
-            ResultSet resultSet = statement.executeQuery(selectAllSQL);
+            PreparedStatement preparedStatement = this.getPreparedStatement(selectAllSQL);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 listObjectResult.add(this.createObject(resultSet));
             }
@@ -125,9 +119,5 @@ public abstract class GenericRepository {
 
     private PreparedStatement getPreparedStatement (String querySQL) throws SQLException {
         return (PreparedStatement) ConectionMySql.connection.prepareStatement(querySQL);
-    }
-
-    private Statement getStatement (String querySQL) throws SQLException {
-        return (Statement) ConectionMySql.connection.prepareStatement(querySQL);
     }
 }
