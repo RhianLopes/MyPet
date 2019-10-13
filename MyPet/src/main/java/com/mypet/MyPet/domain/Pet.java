@@ -11,7 +11,7 @@ public class Pet extends Domain {
 
     private User user;
 
-    private String nome;
+    private String name;
 
     private Specie specie;
 

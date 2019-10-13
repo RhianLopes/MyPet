@@ -1,11 +1,14 @@
 package com.mypet.MyPet.repository;
 
 import com.mypet.MyPet.domain.User;
+import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
+import lombok.Setter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Setter
 public class UserRepository extends GenericRepository {
 
     private static final String TABLE = "user";
@@ -15,6 +18,9 @@ public class UserRepository extends GenericRepository {
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM %s";
     private static final String SELECT_ONE_SQL = "SELECT * FROM %s WHERE id = ?";
+    private static final String SELECT_BY_EMAIL_SQL = "SELECT * FROM %s WHERE email = ?";
+
+    private String selectByEmailSql;
 
     public UserRepository() {
         super(TABLE);
@@ -24,6 +30,7 @@ public class UserRepository extends GenericRepository {
         super.setInactivateSQL(String.format(INACTIVATE_SQL, TABLE));
         super.setSelectAllSQL(String.format(SELECT_ALL_SQL, TABLE));
         super.setSelectOneSQL(String.format(SELECT_ONE_SQL, TABLE));
+        this.setSelectByEmailSql(String.format(SELECT_BY_EMAIL_SQL, TABLE));
     }
 
     @Override
@@ -58,5 +65,23 @@ public class UserRepository extends GenericRepository {
         user.setPhoto(resultSet.getString("photo"));
         user.setPassword(resultSet.getString("password"));
         return user;
+    }
+
+    public Object findByEmail(String email) {
+        ConectionMySql.openConection();
+        Object objectResult = null;
+        try {
+            PreparedStatement preparedStatement = getPreparedStatement(selectByEmailSql);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                objectResult = this.createObject(resultSet);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConectionMySql.closeConection();
+        }
+        return objectResult;
     }
 }

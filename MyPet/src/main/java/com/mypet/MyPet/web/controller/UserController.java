@@ -3,6 +3,7 @@ package com.mypet.MyPet.web.controller;
 import com.mypet.MyPet.domain.User;
 import com.mypet.MyPet.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/find-by-email/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("id") Long id){
-        return userRepository.find(id);
+    public Object find(@PathVariable("email") String email)   {
+        return userRepository.findByEmail(email);
     }
 }

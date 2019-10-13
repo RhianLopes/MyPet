@@ -12,9 +12,9 @@ import java.util.ArrayList;
 @Setter
 public abstract class GenericRepository {
 
-    protected abstract void setStatementValuesToInsert(PreparedStatement stmt, Object object) throws SQLException;
-    protected abstract void setStatementValuesToUpdate(PreparedStatement stmt, Object object) throws SQLException;
-    protected abstract Object createObject(ResultSet rs) throws SQLException;
+    protected abstract void setStatementValuesToInsert(PreparedStatement preparedStatement, Object object) throws SQLException;
+    protected abstract void setStatementValuesToUpdate(PreparedStatement preparedStatement, Object object) throws SQLException;
+    protected abstract Object createObject(ResultSet resultSet) throws SQLException;
 
     protected String table;
     private String insertSQL;
@@ -31,7 +31,7 @@ public abstract class GenericRepository {
     public Object insert(Object object) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(insertSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(insertSQL);
             this.setStatementValuesToInsert(preparedStatement, object);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -45,7 +45,7 @@ public abstract class GenericRepository {
     public Object update(Object object) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(this.updateSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(this.updateSQL);
             this.setStatementValuesToUpdate(preparedStatement, object);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -59,7 +59,7 @@ public abstract class GenericRepository {
     public void delete(Long id) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(deleteSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(deleteSQL);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -72,7 +72,7 @@ public abstract class GenericRepository {
     public void inactivate(Long id) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(inactivateSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(inactivateSQL);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -82,11 +82,11 @@ public abstract class GenericRepository {
         }
     }
 
-    public Object find( Long id) {
+    public Object findById( Long id) {
         ConectionMySql.openConection();
         Object objectResult = null;
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(selectOneSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(selectOneSQL);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -104,7 +104,7 @@ public abstract class GenericRepository {
         ConectionMySql.openConection();
         ArrayList<Object> listObjectResult = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = this.getPreparedStatement(selectAllSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(selectAllSQL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 listObjectResult.add(this.createObject(resultSet));
@@ -117,7 +117,7 @@ public abstract class GenericRepository {
         return listObjectResult;
     }
 
-    private PreparedStatement getPreparedStatement (String querySQL) throws SQLException {
+    protected static PreparedStatement getPreparedStatement (String querySQL) throws SQLException {
         return (PreparedStatement) ConectionMySql.connection.prepareStatement(querySQL);
     }
 }
