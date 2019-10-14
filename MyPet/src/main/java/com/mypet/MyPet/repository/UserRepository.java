@@ -4,6 +4,7 @@ import com.mypet.MyPet.domain.User;
 import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ public class UserRepository extends GenericRepository {
 
     private String selectByEmailSql;
 
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+
     public UserRepository() {
         super(TABLE);
         super.setInsertSQL(String.format(INSERT_SQL, TABLE));
@@ -36,6 +39,7 @@ public class UserRepository extends GenericRepository {
     @Override
     protected void setStatementValuesToInsert(PreparedStatement preparedStatement, Object object) throws SQLException {
         User user = (User) object;
+        user.setPassword(encoder.encode(user.getPassword()));
         preparedStatement.setString(1, user.getName());
         preparedStatement.setString(2, user.getNickname());
         preparedStatement.setString(3, user.getEmail());
@@ -79,6 +83,25 @@ public class UserRepository extends GenericRepository {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            ConectionMySql.closeConection();
+        }
+        return objectResult;
+    }
+
+    public boolean findByEmailExists(String email) {
+        ConectionMySql.openConection();
+        boolean objectResult = false;
+        try {
+            PreparedStatement preparedStatement = getPreparedStatement(selectByEmailSql);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                objectResult = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            objectResult = false;
         } finally {
             ConectionMySql.closeConection();
         }

@@ -25,22 +25,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${security.public.path}")
-    private String publicPath;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
-//
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
-//
-//    @Autowired
-//    private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-       // authenticationManagerBuilder
-            //.userDetailsService(customUserDetailsService)
-            //.passwordEncoder(passwordEncoder());
-    }
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // tudo que estiver a partir de "/public/**"
             // está permitido, mesmo sem autenticação
 
-            .antMatchers(publicPath)
+            .antMatchers("/public/**")
             .permitAll()
 
             .antMatchers("/h2-console/**")
@@ -90,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
         ;
 
-      //  http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 }

@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("public/api/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private UserRepository userRepository = new UserRepository();
-
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody User user){
-        return userRepository.insert(user);
-    }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

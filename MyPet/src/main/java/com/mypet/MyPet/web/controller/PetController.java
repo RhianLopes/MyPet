@@ -3,17 +3,12 @@ package com.mypet.MyPet.web.controller;
 import com.mypet.MyPet.domain.Pet;
 import com.mypet.MyPet.repository.GenericRepository;
 import com.mypet.MyPet.repository.PetRepository;
-import com.mypet.MyPet.repository.UserRepository;
-import com.mysql.jdbc.PreparedStatement;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("public/api/pet")
+@RequestMapping("/api/pet")
 public class PetController {
 
     private PetRepository petRepository = new PetRepository();

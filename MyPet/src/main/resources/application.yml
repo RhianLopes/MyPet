@@ -5,7 +5,7 @@ server:
 
 security:
   jwt:
-    secret: "my-pet-2019-java-jwt"
+    secret: "crescer-2019-1-java-jwt"
     expiration: 864000000
   public:
     path: "/public/**"
