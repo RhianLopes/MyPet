@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:background="@drawable/borda"
-        android:text="Sing up"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -52,6 +52,7 @@
         android:inputType="textPersonName"
         android:padding="5sp"
         android:paddingStart="15sp"
+        android:textColor="#0F0000"
         android:textColorHint="#6F0A0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +72,7 @@
         android:inputType="textEmailAddress"
         android:padding="5sp"
         android:paddingStart="15sp"
+        android:textColor="#0F0000"
         android:textColorHint="#6F0A0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +91,7 @@
         android:inputType="textPassword"
         android:padding="5sp"
         android:paddingStart="15sp"
+        android:textColor="#0F0000"
         android:textColorHint="#6F0A0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +110,7 @@
         android:inputType="textPersonName"
         android:padding="5sp"
         android:paddingStart="15sp"
+        android:textColor="#0F0000"
         android:textColorHint="#6F0A0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,19 +120,19 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_paw"
         android:layout_width="70dp"
         android:layout_height="69dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_logo"
+        app:layout_constraintEnd_toEndOf="@+id/tv_logo"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/tv_logo"
+        app:layout_constraintTop_toTopOf="@+id/tv_logo"
         app:layout_constraintVertical_bias="0.373"
         app:srcCompat="@drawable/patinhas2" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_logo"
         android:layout_width="295dp"
         android:layout_height="153dp"
         android:fontFamily="@font/baloo"
@@ -152,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_logo" />
 
     <TextView
         android:id="@+id/tv_nickname"
