@@ -24,8 +24,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         this.btSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itLoginScreen = new Intent(HomeScreenActivity.this, SingUpActivity.class);
-                startActivity(itLoginScreen);
+                Intent itSingUpScreen = new Intent(HomeScreenActivity.this, SingUpActivity.class);
+                startActivity(itSingUpScreen);
                 finish();
             }
         });

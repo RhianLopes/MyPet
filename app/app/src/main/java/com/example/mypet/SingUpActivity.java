@@ -38,24 +38,57 @@ public class SingUpActivity extends AppCompatActivity implements Validator.Valid
     private EditText etNickname;
     private TextView tvEmail;
     @NotEmpty(message = "Required field")
-    @Email(message = "invalid email")
+    @Length(max= 100)
+    @Email
     private EditText etEmail;
     private TextView tvPassword;
-    @Password(scheme = Password.Scheme.ALPHA_NUMERIC)
+    @Password
     @Length(max = 80)
     private EditText etPassword;
     private TextView tvPhoto;
     @Length(max = 1000)
     private EditText etPhoto;
     private Button btRegister;
-    private Validator validator;
     private Retrofit retrofit;
+    private Validator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
         this.inicilizeComponents();
+
+            this.btRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+
+                    User user = new User();
+                    user.setName(etName.getText().toString());
+                    user.setNickname(etNickname.getText().toString());
+                    user.setEmail(etEmail.getText().toString());
+                    user.setPassword(etPassword.getText().toString());
+                    user.setPhoto(etPhoto.getText().toString());
+
+                    UserService userService = retrofit.create(UserService.class);
+
+                    userService.register(user).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(SingUpActivity.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
+                                btRegistrer_onClick(view);
+                            }else{
+                                Toast.makeText(SingUpActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(SingUpActivity.this, "erro", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
 
 
 
@@ -74,53 +107,28 @@ public class SingUpActivity extends AppCompatActivity implements Validator.Valid
         this.tvPhoto=findViewById(R.id.tv_photo);
         this.etPhoto=findViewById(R.id.et_photo);
         this.btRegister= findViewById(R.id.bt_registrer);
-        this.validator= new Validator(this);
+        this.validator = new Validator(this);
         this.validator.setValidationListener(this);
         retrofit = new Retrofit.Builder()
-                   .baseUrl("http://192.168.43.244:8080/")
+                   .baseUrl("http://10.0.2.2:8080/my-pet/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        this.btRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btRegister_onclick(view);
-                User user = new User();
-                user.setName(etName.getText().toString());
-                user.setNickname(etNickname.getText().toString());
-                user.setEmail(etEmail.getText().toString());
-                user.setPassword(etPassword.getText().toString());
-                user.setPhoto(etPhoto.getText().toString());
-
-                UserService userService = retrofit.create(UserService.class);
-
-                userService.register(user).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(SingUpActivity.this, "Oi", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(SingUpActivity.this, "oii", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
 
 
     }
 
-    private void btRegister_onclick(View view){
+    private void btRegistrer_onClick(View view){
         validator.validate();
-
     }
+
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(this, "Welcome to MyPet", Toast.LENGTH_LONG).show();
-
+        Intent itPetScreen = new Intent(SingUpActivity.this, PetScreenActivity.class );
+        startActivity(itPetScreen);
     }
+
     @Override
-    public void onValidationFailed(List<ValidationError> errors){
+    public void onValidationFailed(List<ValidationError> errors) {
         for (ValidationError error: errors){
             View component = error.getView();
             String errorMessage = error.getCollatedErrorMessage(this);
