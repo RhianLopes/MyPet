@@ -25,7 +25,7 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
-public class SingUpActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class SignUpScreenActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     private TextView tvLogo;
     private ImageView ivPaw;
@@ -55,7 +55,7 @@ public class SingUpActivity extends AppCompatActivity implements Validator.Valid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_up);
+        setContentView(R.layout.activity_sign_up_screen);
         this.inicilizeComponents();
 
             this.btRegister.setOnClickListener(new View.OnClickListener() {
@@ -75,16 +75,16 @@ public class SingUpActivity extends AppCompatActivity implements Validator.Valid
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()){
-                                Toast.makeText(SingUpActivity.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpScreenActivity.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
                                 btRegistrer_onClick(view);
                             }else{
-                                Toast.makeText(SingUpActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpScreenActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(SingUpActivity.this, "erro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpScreenActivity.this, "erro", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -123,7 +123,7 @@ public class SingUpActivity extends AppCompatActivity implements Validator.Valid
 
     @Override
     public void onValidationSucceeded() {
-        Intent itPetScreen = new Intent(SingUpActivity.this, PetScreenActivity.class );
+        Intent itPetScreen = new Intent(SignUpScreenActivity.this, PetScreenActivity.class );
         startActivity(itPetScreen);
     }
 

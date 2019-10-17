@@ -12,7 +12,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     private TextView tvLogo;
     private Button btLogin;
-    private Button btSingUp;
+    private Button btSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +21,28 @@ public class HomeScreenActivity extends AppCompatActivity {
         this.initializeComponents();
 
 
-        this.btSingUp.setOnClickListener(new View.OnClickListener() {
+        this.btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itSingUpScreen = new Intent(HomeScreenActivity.this, SingUpActivity.class);
+                Intent itSingUpScreen = new Intent(HomeScreenActivity.this, SignUpScreenActivity.class);
                 startActivity(itSingUpScreen);
                 finish();
             }
         });
-
+        this.btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itLoginScreen = new Intent(HomeScreenActivity.this, LoginScreenActivity.class);
+                startActivity(itLoginScreen);
+                finish();
+            }
+        });
     }
 
     private void initializeComponents(){
         this.tvLogo= findViewById(R.id.tv_logo);
         this.btLogin= findViewById(R.id.bt_login);
-        this.btSingUp= findViewById(R.id.bt_sing_up);
+        this.btSignUp= findViewById(R.id.bt_sign_up);
 
     }
 }
