@@ -123,7 +123,7 @@ public class SignUpScreenActivity extends AppCompatActivity implements Validator
 
     @Override
     public void onValidationSucceeded() {
-        Intent itPetScreen = new Intent(SignUpScreenActivity.this, PetScreenActivity.class );
+        Intent itPetScreen = new Intent(SignUpScreenActivity.this, PetLoginActivity.class );
         startActivity(itPetScreen);
     }
 

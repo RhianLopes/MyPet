@@ -1,7 +1,6 @@
 package com.example.mypet;
 
 import androidx.appcompat.app.AppCompatActivity;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,7 +22,7 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
-public class LoginScreenActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class UserLoginScreenActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     private TextView tvLogo;
     private ImageView ivPaw;
@@ -45,6 +44,7 @@ public class LoginScreenActivity extends AppCompatActivity implements Validator.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         this.inicializeComponents();
+
 
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +76,10 @@ public class LoginScreenActivity extends AppCompatActivity implements Validator.
     }
 
 
-    private void doLogin(User email, User password){
 
-    }
     @Override
     public void onValidationSucceeded() {
-        Intent itPetScreen = new Intent(LoginScreenActivity.this, PetScreenActivity.class );
+        Intent itPetScreen = new Intent(UserLoginScreenActivity.this, PetScreenActivity.class );
         startActivity(itPetScreen);
     }
 
@@ -97,4 +95,6 @@ public class LoginScreenActivity extends AppCompatActivity implements Validator.
         Toast.makeText(this, "Error! Try Again!", Toast.LENGTH_SHORT).show();
 
     }
+
+
 }

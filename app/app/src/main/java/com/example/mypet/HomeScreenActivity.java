@@ -32,7 +32,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         this.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itLoginScreen = new Intent(HomeScreenActivity.this, LoginScreenActivity.class);
+                Intent itLoginScreen = new Intent(HomeScreenActivity.this, UserLoginScreenActivity.class);
                 startActivity(itLoginScreen);
                 finish();
             }

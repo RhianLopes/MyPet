@@ -4,7 +4,6 @@ package com.example.mypet;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -12,6 +11,6 @@ public interface UserService {
     Call<User> register(@Body User user);
 
     @POST("public/authentication/login")
-    Call<LoginRequest> register(@Body LoginRequest loginRequest);
+    Call<LoginRequest> login(@Body LoginRequest loginRequest);
 
 }
