@@ -1,6 +1,9 @@
 package com.example.mypet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -38,6 +41,7 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
     private Button btSignUp;
     private Validator validator;
     private Retrofit retrofit;
+    private LoginRequest loginRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,30 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
 
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
+                LoginRequest login = new LoginRequest();
+                login.setEmail(etEmail.getText().toString());
+                login.setPassword(etPassword.getText().toString());
+
+                UserService userService = retrofit.create(UserService.class);
+
+                userService.login(login).enqueue(new Callback<LoginRequest>() {
+                    @Override
+                    public void onResponse(Call<LoginRequest> call, Response<LoginRequest> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(UserLoginScreenActivity.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
+                            btLogin_onClick(v);
+                        }else{
+                            Toast.makeText(UserLoginScreenActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginRequest> call, Throwable t) {
+                        Toast.makeText(UserLoginScreenActivity.this, "erro", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -57,21 +83,21 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
 
     public void inicializeComponents(){
         this.tvLogo = findViewById(R.id.tv_logo);
-        this.ivPaw = findViewById(R.id.iv_paw);
+//        this.ivPaw = findViewById(R.id.iv_paw);
         this.tvEmail = findViewById(R.id.tv_email);
         this.etEmail = findViewById(R.id.et_email);
         this.tvPassword = findViewById(R.id.tv_password);
-        this.etPassword = findViewById(R.id.et_email);
+        this.etPassword = findViewById(R.id.et_password);
         this.btSignUp = findViewById(R.id.bt_sign_in);
         this.validator = new Validator(this);
         this.validator.setValidationListener(this);
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/my-pet/")
+                .baseUrl("http://10.0.2.2:8000/my-pet/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
     }
-    private void btRegistrer_onClick(View view){
+    private void btLogin_onClick(View view){
         validator.validate();
     }
 
@@ -79,8 +105,8 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
 
     @Override
     public void onValidationSucceeded() {
-        Intent itPetScreen = new Intent(UserLoginScreenActivity.this, PetScreenActivity.class );
-        startActivity(itPetScreen);
+//        Intent itPetScreen = new Intent(UserLoginScreenActivity.this, PetScreenActivity.class );
+//        startActivity(itPetScreen);
     }
 
     @Override

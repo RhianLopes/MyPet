@@ -95,7 +95,7 @@ public class SignUpScreenActivity extends AppCompatActivity implements Validator
     }
     private void inicilizeComponents(){
         this.tvLogo = findViewById(R.id.tv_logo);
-        this.ivPaw=findViewById(R.id.iv_paw);
+
         this.tvName=findViewById(R.id.tv_name);
         this.etName=findViewById(R.id.et_name);
         this.tvNickname=findViewById(R.id.tv_nickname);
@@ -110,7 +110,7 @@ public class SignUpScreenActivity extends AppCompatActivity implements Validator
         this.validator = new Validator(this);
         this.validator.setValidationListener(this);
         retrofit = new Retrofit.Builder()
-                   .baseUrl("http://10.0.2.2:8080/my-pet/")
+                   .baseUrl("http://10.0.2.2:8000/my-pet/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -123,8 +123,8 @@ public class SignUpScreenActivity extends AppCompatActivity implements Validator
 
     @Override
     public void onValidationSucceeded() {
-        Intent itPetScreen = new Intent(SignUpScreenActivity.this, PetLoginActivity.class );
-        startActivity(itPetScreen);
+//        Intent itPetScreen = new Intent(SignUpScreenActivity.this, PetLoginActivity.class );
+//        startActivity(itPetScreen);
     }
 
     @Override
