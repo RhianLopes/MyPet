@@ -4,10 +4,12 @@ import com.mypet.MyPet.domain.Genre;
 import com.mypet.MyPet.domain.Pet;
 import com.mypet.MyPet.domain.Specie;
 import com.mypet.MyPet.domain.User;
+import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PetRepository extends GenericRepository {
 
@@ -18,6 +20,7 @@ public class PetRepository extends GenericRepository {
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1";
     private static final String SELECT_ONE_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and p.id = ?";
+    private static final String SELECT_ALL_BY_USER_ID_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and u.id = ?";
 
     public PetRepository(){
         super(TABLE);
@@ -64,5 +67,23 @@ public class PetRepository extends GenericRepository {
         pet.getUser().setNickname(resultSet.getString("nickname"));
         pet.getUser().setPhoto(resultSet.getString("user_photo"));
         return pet;
+    }
+
+    public ArrayList<Object> findAllByUserId(Long userId) {
+        ConectionMySql.openConection();
+        ArrayList<Object> listObjectResult = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = getPreparedStatement(SELECT_ALL_BY_USER_ID_SQL);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                listObjectResult.add(this.createObject(resultSet));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConectionMySql.closeConection();
+        }
+        return listObjectResult;
     }
 }

@@ -48,4 +48,9 @@ public class PetController {
     public Object find(@PathVariable("id") Long id){
         return petRepository.findById(id);
     }
+    @GetMapping("/find-by-user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Object findByUserId(@PathVariable("userId") Long id){
+        return petRepository.findAllByUserId(id);
+    }
 }
