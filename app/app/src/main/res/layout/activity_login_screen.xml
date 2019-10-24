@@ -7,20 +7,21 @@
     android:background="#3CE8F3"
     tools:context=".UserLoginScreenActivity">
 
+
     <Button
         android:id="@+id/bt_sign_in"
         android:layout_width="282dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/borda"
+        android:onClick="login"
         android:text="Sign in"
-        android:onClick = "login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_logo"
-        app:layout_constraintVertical_bias="0.579" />
+        app:layout_constraintVertical_bias="0.654" />
 
     <EditText
         android:id="@+id/et_password"
@@ -38,7 +39,8 @@
         app:layout_constraintBottom_toTopOf="@+id/bt_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_logo"
+        app:layout_constraintVertical_bias="0.658" />
 
     <EditText
         android:id="@+id/et_email"
@@ -56,9 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_logo"
-        app:layout_constraintVertical_bias="0.648" />
-
-
+        app:layout_constraintVertical_bias="0.67" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -92,18 +92,30 @@
 
     <TextView
         android:id="@+id/tv_logo"
-        android:layout_width="328dp"
-        android:layout_height="138dp"
+        android:layout_width="309dp"
+        android:layout_height="151dp"
         android:layout_marginTop="104dp"
         android:fontFamily="@font/baloo"
         android:text="MyPet"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:textSize="70sp"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="105dp"
+        android:layout_height="76dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_logo"
+        app:layout_constraintEnd_toEndOf="@+id/tv_logo"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_logo"
+        app:layout_constraintTop_toTopOf="@+id/tv_logo"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/patinha" />
 </androidx.constraintlayout.widget.ConstraintLayout>
