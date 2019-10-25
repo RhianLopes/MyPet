@@ -14,7 +14,6 @@
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/borda"
-        android:onClick="login"
         android:text="Sign in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

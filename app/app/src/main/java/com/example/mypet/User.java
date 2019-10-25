@@ -1,7 +1,7 @@
 package com.example.mypet;
 
 
-import com.example.mypet.Domain;
+import Domain;
 
 public class User extends Domain {
 
