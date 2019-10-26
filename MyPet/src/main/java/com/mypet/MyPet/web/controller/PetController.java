@@ -2,7 +2,6 @@ package com.mypet.MyPet.web.controller;
 
 import com.mypet.MyPet.domain.Pet;
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.GenericRepository;
 import com.mypet.MyPet.repository.PetRepository;
 import com.mypet.MyPet.security.UserPrincipal;
 import org.springframework.http.HttpStatus;

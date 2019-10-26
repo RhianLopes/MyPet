@@ -2,8 +2,8 @@ package com.mypet.MyPet.web.controller;
 
 import com.mypet.MyPet.repository.UserRepository;
 import com.mypet.MyPet.security.AuthenticationService;
-import com.mypet.MyPet.web.controller.request.LoginRequest;
-import com.mypet.MyPet.web.controller.response.LoginResponse;
+import com.mypet.MyPet.web.request.LoginRequest;
+import com.mypet.MyPet.web.response.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

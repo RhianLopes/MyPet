@@ -2,9 +2,7 @@ package com.mypet.MyPet.security;
 
 import com.mypet.MyPet.domain.User;
 import com.mypet.MyPet.repository.UserRepository;
-import com.mypet.MyPet.web.controller.response.LoginResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
+import com.mypet.MyPet.web.response.LoginResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

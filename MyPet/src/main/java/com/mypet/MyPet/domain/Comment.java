@@ -13,7 +13,7 @@ public class Comment extends Domain {
 
     private Pet pet;
 
-    private Pet post;
+    private Post post;
 
     private String content;
 

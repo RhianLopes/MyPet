@@ -1,4 +1,4 @@
-package com.mypet.MyPet.web.controller.response;
+package com.mypet.MyPet.web.response;
 
 import lombok.Data;
 
