@@ -1,4 +1,3 @@
-
 CREATE TABLE comment (
     id     BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
     pet_id         BIGINT UNSIGNED NOT NULL,
@@ -60,8 +59,6 @@ CREATE TABLE pet (
 CREATE TABLE post (
     id       BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
     pet_id        BIGINT UNSIGNED NOT NULL,
-    comment_id    BIGINT UNSIGNED NOT NULL,
-    enjoy_id      BIGINT UNSIGNED NOT NULL,
     photos        VARCHAR(1000),
     description   VARCHAR(280) NOT NULL,
     DATE          DATETIME NOT NULL,
@@ -116,14 +113,6 @@ ALTER TABLE notification
 ALTER TABLE pet
     ADD CONSTRAINT pet_user_fk FOREIGN KEY ( user_id )
         REFERENCES user ( id );
-
-ALTER TABLE post
-    ADD CONSTRAINT post_comment_fk FOREIGN KEY ( comment_id )
-        REFERENCES comment ( id );
-
-ALTER TABLE post
-    ADD CONSTRAINT post_like_fk FOREIGN KEY ( enjoy_id )
-        REFERENCES enjoy ( id );
 
 ALTER TABLE post
     ADD CONSTRAINT post_pet_fk FOREIGN KEY ( pet_id )
