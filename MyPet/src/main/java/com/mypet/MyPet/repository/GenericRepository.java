@@ -82,7 +82,7 @@ public abstract class GenericRepository {
         }
     }
 
-    public Object findById( Long id) {
+    public Object findById(Long id) {
         ConectionMySql.openConection();
         Object objectResult = null;
         try {
