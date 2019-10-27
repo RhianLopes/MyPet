@@ -5,6 +5,8 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,15 +18,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PetLoginScreen extends ListActivity {
+public class PetLoginScreen extends AppCompatActivity {
 
     private TextView tvLogo;
     private ImageView ivPaw;
-    private ListView lvPet;
+    private ListView list;
     private Button btAddPet;
     private Button btEditUser;
     private Retrofit retrofit;
@@ -43,9 +46,24 @@ public class PetLoginScreen extends ListActivity {
 
         PetService petService = retrofit.create(PetService.class);
 
-        ArrayList<Pet> petArrayList = (ArrayList<Pet>) petService.findByUserId(token);
-        ArrayAdapter<Pet> adapter = new ArrayAdapter<Pet>(this, android.R.layout.simple_list_item_1, petArrayList);
-        lvPet.setAdapter(adapter);
+        petService.findByUserId(token).enqueue(new Callback<ArrayList<Object>>() {
+
+            @Override
+            public void onResponse(Call<ArrayList<Object>> call, retrofit2.Response<ArrayList<Object>> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PetLoginScreen.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Object>> call, Throwable t) {
+                Toast.makeText(PetLoginScreen.this, "erro", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
 
     }
@@ -53,7 +71,7 @@ public class PetLoginScreen extends ListActivity {
     private void initializeComponents(){
         this.tvLogo= findViewById(R.id.tv_logo);
         this.ivPaw = findViewById(R.id.iv_paw);
-        this.lvPet =  (ListView) findViewById(android.R.id.list);
+        this.list = findViewById(R.id.list);
         this.btAddPet = findViewById(R.id.bt_add_pet);
         this.btEditUser = findViewById(R.id.bt_edit_user);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -66,7 +84,7 @@ public class PetLoginScreen extends ListActivity {
             }
         }).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl("http://10.0.2.2:8000/my-pet/")
                 .addConverterFactory(GsonConverterFactory.create())

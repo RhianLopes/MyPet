@@ -9,6 +9,6 @@ import retrofit2.http.Header;
 public interface PetService {
 
     @GET("api/pet/find-by-user")
-    Call<ArrayList<Pet>> findByUserId(@Header("Authorization") String authHeader);
+    Call<ArrayList<Object>> findByUserId(@Header("Authorization") String authHeader);
 
 }
