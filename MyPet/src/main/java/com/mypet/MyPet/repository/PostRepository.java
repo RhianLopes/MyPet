@@ -17,8 +17,8 @@ public class PostRepository extends GenericRepository  {
     private static final String UPDATE_SQL = "UPDATE %s SET description = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.active = 1";
-    private static final String SELECT_ONE_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.id = ? AND po.active = 1";
+    private static final String SELECT_ALL_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, COUNT(en.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id INNER JOIN enjoy en ON en.post_id = po.id WHERE po.active = 1";
+    private static final String SELECT_ONE_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, COUNT(en.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id INNER JOIN enjoy en ON en.post_id = po.id WHERE po.id = ? AND po.active = 1";
 
     private CommentRepository commentRepository = new CommentRepository();
 
@@ -64,6 +64,7 @@ public class PostRepository extends GenericRepository  {
         post.getPet().setGenre(Genre.valueOf(resultSet.getString("genre")));
         post.getPet().setPhoto(resultSet.getString("pet_photo"));
         post.getPet().setActive(resultSet.getBoolean("pet_active"));
+        post.setAmountEnjoy(resultSet.getInt("enjoys"));
         return post;
     }
 
