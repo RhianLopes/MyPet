@@ -42,7 +42,6 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
     private Button btSignUp;
     private Validator validator;
     private Retrofit retrofit;
-    private LoginRequest loginRequest;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -74,6 +73,7 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
                             editor.putString("token", loginResponse.getAccessToken());
                             editor.commit();
                             Intent itPetLogin = new Intent(UserLoginScreenActivity.this, PetLoginScreen.class );
+
                             startActivity(itPetLogin);
                             finish();
                         }else{

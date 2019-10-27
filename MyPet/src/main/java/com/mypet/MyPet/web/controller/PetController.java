@@ -55,7 +55,7 @@ public class PetController {
 
     @GetMapping("/find-by-user")
     @ResponseStatus(HttpStatus.OK)
-    public Object findByUserId(@AuthenticationPrincipal UserPrincipal currentUser){
+    public ArrayList<Object> findByUserId(@AuthenticationPrincipal UserPrincipal currentUser){
         return petRepository.findAllByUserId(currentUser.getId());
     }
 }

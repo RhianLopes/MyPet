@@ -1,8 +1,5 @@
 package com.example.mypet;
 
-
-import Domain;
-
 public class User extends Domain {
 
     private String name;
