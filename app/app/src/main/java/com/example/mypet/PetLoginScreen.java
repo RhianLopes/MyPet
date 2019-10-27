@@ -70,7 +70,6 @@ public class PetLoginScreen extends AppCompatActivity {
 
     private void initializeComponents(){
         this.tvLogo= findViewById(R.id.tv_logo);
-        this.ivPaw = findViewById(R.id.iv_paw);
         this.list = findViewById(R.id.list);
         this.btAddPet = findViewById(R.id.bt_add_pet);
         this.btEditUser = findViewById(R.id.bt_edit_user);

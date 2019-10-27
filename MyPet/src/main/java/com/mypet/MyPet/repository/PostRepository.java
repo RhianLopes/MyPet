@@ -2,9 +2,6 @@ package com.mypet.MyPet.repository;
 
 import com.mypet.MyPet.domain.*;
 import com.mysql.jdbc.PreparedStatement;
-import javafx.geometry.Pos;
-
-import javax.print.DocFlavor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
