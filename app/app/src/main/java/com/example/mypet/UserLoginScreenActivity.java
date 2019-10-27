@@ -7,6 +7,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -72,6 +73,9 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
                             LoginResponse loginResponse = response.body();
                             editor.putString("token", loginResponse.getAccessToken());
                             editor.commit();
+                            Intent itPetLogin = new Intent(UserLoginScreenActivity.this, PetLoginScreen.class );
+                            startActivity(itPetLogin);
+                            finish();
                         }else{
                             Toast.makeText(UserLoginScreenActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
                         }

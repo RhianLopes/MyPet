@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,9 +15,11 @@ public class Post extends Domain{
 
     private Pet pet;
 
-    private List<Comment> comment;
+    private ArrayList<Comment> comment;
 
-    private List<Enjoy> enjoy;
+    private ArrayList<Enjoy> enjoy;
+
+    private int amountEnjoy;
 
     private String photos;
 
