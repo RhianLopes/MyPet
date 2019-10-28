@@ -1,5 +1,6 @@
 package com.example.mypet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -52,8 +53,12 @@ public class PetLoginScreen extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Object>> call, retrofit2.Response<ArrayList<Object>> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
-                    ArrayList<Object> petArray = response.body();
-                    ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(PetLoginScreen.this, android.R.layout.simple_list_item_1, petArray);
+                    ArrayList<Object> objectArrayList = response.body();
+                    ArrayList<String> petArrayList = new ArrayList<>();
+                    for (int i = 0; i<= objectArrayList.size(); i++){
+                        petArrayList.add(objectArrayList.get(i).toString());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PetLoginScreen.this, android.R.layout.simple_list_item_1, petArrayList);
                     list.setAdapter(adapter);
 
                 } else {
@@ -93,5 +98,12 @@ public class PetLoginScreen extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        Pet pet = new Pet();
+        return pet.getName();
     }
 }
