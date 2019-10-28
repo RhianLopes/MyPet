@@ -106,8 +106,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9399e9183b0c6c746f1df977b671e810f7e2783b
 </androidx.constraintlayout.widget.ConstraintLayout>
