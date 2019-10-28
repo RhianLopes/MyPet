@@ -52,6 +52,10 @@ public class PetLoginScreen extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Object>> call, retrofit2.Response<ArrayList<Object>> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
+                    ArrayList<Object> petArray = response.body();
+                    ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(PetLoginScreen.this, android.R.layout.simple_list_item_1, petArray);
+                    list.setAdapter(adapter);
+
                 } else {
                     Toast.makeText(PetLoginScreen.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
                 }
@@ -70,7 +74,6 @@ public class PetLoginScreen extends AppCompatActivity {
 
     private void initializeComponents(){
         this.tvLogo= findViewById(R.id.tv_logo);
-        this.ivPaw = findViewById(R.id.iv_paw);
         this.list = findViewById(R.id.list);
         this.btAddPet = findViewById(R.id.bt_add_pet);
         this.btEditUser = findViewById(R.id.bt_edit_user);
