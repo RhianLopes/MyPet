@@ -22,7 +22,7 @@ public class PetController {
         pet.getUser().setId(currentUser.getId());
         return petRepository.insert(pet);
     }
-
+    
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void delete(@PathVariable("id") Long id){

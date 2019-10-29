@@ -35,15 +35,6 @@ CREATE TABLE enjoy (
     PRIMARY KEY ( id )
 ); 
 
-CREATE TABLE notification (
-    id   BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-    notified_pet_id   BIGINT UNSIGNED NOT NULL,
-    recived_pet_id    BIGINT UNSIGNED NOT NULL,
-    message           VARCHAR(150) NOT NULL,
-    active            BOOL NOT NULL,
-	PRIMARY KEY ( id )
-);
-
 CREATE TABLE pet (
     id        BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
     user_id       BIGINT UNSIGNED NOT NULL,
