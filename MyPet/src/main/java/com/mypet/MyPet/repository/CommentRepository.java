@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Data
-public class CommentRepository extends GenericRepository {
+public class CommentRepository<T> extends GenericRepository {
 
     private static final String TABLE = "comment";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, post_id, content, date, active) VALUES (NULL, ?, ?, ?, ?, 1)";
@@ -54,7 +54,7 @@ public class CommentRepository extends GenericRepository {
     }
 
     @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
+    protected T createObject(ResultSet resultSet) throws SQLException {
         Comment comment = new Comment();
         comment.setPet(new Pet());
         comment.setPost(new Post());
@@ -64,27 +64,18 @@ public class CommentRepository extends GenericRepository {
         comment.setContent(resultSet.getString("content"));
         comment.setDateTime(resultSet.getObject("date", LocalDateTime.class));
         comment.setActive(resultSet.getBoolean("active"));
-        return comment;
+        return (T) comment;
     }
 
-    protected Comment createCommentObject(ResultSet resultSet) throws SQLException {
-        Comment comment = new Comment();
-        comment.setId(resultSet.getLong("id"));
-        comment.setContent(resultSet.getString("content"));
-        comment.setDateTime(resultSet.getObject("date", LocalDateTime.class));
-        comment.setActive(resultSet.getBoolean("active"));
-        return comment;
-    }
-
-    public ArrayList<Comment> findByPostId(Long postId){
+    public ArrayList<T> findByPostId(Long postId){
         ConectionMySql.openConection();
-        ArrayList<Comment> listObjectResult = new ArrayList<>();
+        ArrayList<T> listObjectResult = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = getPreparedStatement(selectByPostId);
             preparedStatement.setLong(1, postId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                listObjectResult.add(this.createCommentObject(resultSet));
+                listObjectResult.add(this.createObject(resultSet));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

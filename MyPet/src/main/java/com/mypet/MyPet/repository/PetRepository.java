@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PetRepository extends GenericRepository {
+public class PetRepository<T> extends GenericRepository {
 
     private static final String TABLE = "pet";
     private static final String INSERT_SQL = "INSERT INTO %s (id, user_id, name, species, description, genre, photo, active) VALUES (NULL, ?, ?, ?, ?, ?, ?, 1)";
@@ -53,7 +53,7 @@ public class PetRepository extends GenericRepository {
     }
 
     @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
+    protected T createObject(ResultSet resultSet) throws SQLException {
         Pet pet = new Pet();
         pet.setUser(new User());
         pet.setId(resultSet.getLong("id"));
@@ -66,12 +66,12 @@ public class PetRepository extends GenericRepository {
         pet.getUser().setName(resultSet.getString("user_name"));
         pet.getUser().setNickname(resultSet.getString("nickname"));
         pet.getUser().setPhoto(resultSet.getString("user_photo"));
-        return pet;
+        return (T) pet;
     }
 
-    public ArrayList<Object> findAllByUserId(Long userId) {
+    public ArrayList<T> findAllByUserId(Long userId) {
         ConectionMySql.openConection();
-        ArrayList<Object> listObjectResult = new ArrayList<>();
+        ArrayList<T> listObjectResult = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = getPreparedStatement(SELECT_ALL_BY_USER_ID_SQL);
             preparedStatement.setLong(1, userId);

@@ -1,14 +1,9 @@
-package com.mypet.MyPet.domain;
+package com.example.mypet;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+
 public class Comment extends Domain {
 
     private Pet pet;

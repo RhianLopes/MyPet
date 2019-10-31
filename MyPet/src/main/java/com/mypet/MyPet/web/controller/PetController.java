@@ -17,10 +17,10 @@ public class PetController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody Pet pet, @AuthenticationPrincipal UserPrincipal currentUser){
+    public Pet insert(@RequestBody Pet pet, @AuthenticationPrincipal UserPrincipal currentUser){
         pet.setUser(new User());
         pet.getUser().setId(currentUser.getId());
-        return petRepository.insert(pet);
+        return (Pet) petRepository.insert(pet);
     }
     
     @DeleteMapping("/delete/{id}")
@@ -37,25 +37,25 @@ public class PetController {
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Object update(@RequestBody Pet pet){
-        return petRepository.update(pet);
+    public Pet update(@RequestBody Pet pet){
+        return (Pet) petRepository.update(pet);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findAll(){
+    public ArrayList<Pet> findAll(){
         return petRepository.findAll();
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("id") Long id){
-        return petRepository.findById(id);
+    public Pet find(@PathVariable("id") Long id){
+        return (Pet) petRepository.findById(id);
     }
 
     @GetMapping("/find-by-user")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findByUserId(@AuthenticationPrincipal UserPrincipal currentUser){
+    public ArrayList<Pet> findByUserId(@AuthenticationPrincipal UserPrincipal currentUser){
         return petRepository.findAllByUserId(currentUser.getId());
     }
 }

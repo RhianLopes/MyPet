@@ -15,8 +15,8 @@ public class EnjoyController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody Enjoy enjoy){
-        return enjoyRepository.insert(enjoy);
+    public Enjoy insert(@RequestBody Enjoy enjoy){
+        return (Enjoy) enjoyRepository.insert(enjoy);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,19 +33,19 @@ public class EnjoyController {
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Object update(@RequestBody Enjoy enjoy){
-        return enjoyRepository.update(enjoy);
+    public Enjoy update(@RequestBody Enjoy enjoy){
+        return (Enjoy) enjoyRepository.update(enjoy);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findAll(){
+    public ArrayList<Enjoy> findAll(){
         return enjoyRepository.findAll();
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("id") Long id){
-        return enjoyRepository.findById(id);
+    public Enjoy find(@PathVariable("id") Long id){
+        return (Enjoy) enjoyRepository.findById(id);
     }
 }

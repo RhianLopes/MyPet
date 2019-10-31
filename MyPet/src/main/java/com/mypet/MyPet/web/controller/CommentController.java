@@ -15,8 +15,8 @@ public class CommentController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody Comment comment){
-        return commentRepository.insert(comment);
+    public Comment insert(@RequestBody Comment comment){
+        return (Comment) commentRepository.insert(comment);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,19 +33,19 @@ public class CommentController {
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Object update(@RequestBody Comment comment){
-        return commentRepository.update(comment);
+    public Comment update(@RequestBody Comment comment){
+        return (Comment) commentRepository.update(comment);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findAll(){
+    public ArrayList<Comment> findAll(){
         return commentRepository.findAll();
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("id") Long id){
-        return commentRepository.findById(id);
+    public Comment find(@PathVariable("id") Long id){
+        return (Comment) commentRepository.findById(id);
     }
 }

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class PostRepository extends GenericRepository  {
+public class PostRepository<T> extends GenericRepository  {
 
     private static final String TABLE = "post";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, photos, description, DATE, active) VALUES (NULL, ?, ?, ?, ?, 1)";
@@ -46,7 +46,7 @@ public class PostRepository extends GenericRepository  {
     }
 
     @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
+    protected T createObject(ResultSet resultSet) throws SQLException {
         Post post = new Post();
         post.setPet(new Pet());
         post.setId(resultSet.getLong("post_id"));
@@ -62,19 +62,11 @@ public class PostRepository extends GenericRepository  {
         post.getPet().setPhoto(resultSet.getString("pet_photo"));
         post.getPet().setActive(resultSet.getBoolean("pet_active"));
         post.setAmountEnjoy(resultSet.getInt("enjoys"));
-        return post;
-    }
-
-    private ArrayList<Post> convertArrayObjectToPost(ArrayList<Object> objectArrayList){
-        ArrayList<Post> postArrayList = new ArrayList<>();
-        objectArrayList.forEach(o -> postArrayList.add((Post)o));
-        return postArrayList;
+        return (T) post;
     }
 
     @Override
-    public ArrayList<Object> findAll() {
-        ArrayList<Post> postArrayList = convertArrayObjectToPost(super.findAll());
-        postArrayList.forEach(p -> p.setComment(commentRepository.findByPostId(p.getId())));
-        return new ArrayList<>(postArrayList);
+    public ArrayList<T> findAll() {
+        return super.findAll();
     }
 }

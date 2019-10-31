@@ -28,7 +28,6 @@ import java.util.List;
 public class SignUpScreenActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     private TextView tvLogo;
-    private ImageView ivPaw;
     private TextView tvName;
     @NotEmpty(message = "Required field")
     @Length(max = 100)
@@ -77,6 +76,9 @@ public class SignUpScreenActivity extends AppCompatActivity implements Validator
                             if(response.isSuccessful()){
                                 Toast.makeText(SignUpScreenActivity.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
                                 btRegistrer_onClick(view);
+                                Intent itLogin = new Intent(SignUpScreenActivity.this, UserLoginScreenActivity.class);
+                                startActivity(itLogin);
+                                finish();
                             }else{
                                 Toast.makeText(SignUpScreenActivity.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
                             }
