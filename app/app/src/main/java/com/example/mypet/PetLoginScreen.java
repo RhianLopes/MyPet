@@ -27,6 +27,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.example.mypet.R.layout.list_text;
+
 public class PetLoginScreen extends AppCompatActivity {
 
     private TextView tvLogo;
@@ -51,21 +53,25 @@ public class PetLoginScreen extends AppCompatActivity {
 
         PetService petService = retrofit.create(PetService.class);
 
-        petService.findByUserId(token).enqueue(new Callback<ArrayList<Object>>() {
+        petService.findByUserId(token).enqueue(new Callback<ArrayList<Pet>>() {
 
             @Override
-            public void onResponse(Call<ArrayList<Object>> call, retrofit2.Response<ArrayList<Object>> response) {
+            public void onResponse(Call<ArrayList<Pet>> call, retrofit2.Response<ArrayList<Pet>> response) {
 
                 if(response.isSuccessful()){
                     Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
-                    ArrayList<Object> petArrayList = response.body();
-                    ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(PetLoginScreen.this, android.R.layout.simple_list_item_1, petArrayList);
+                    ArrayList<Pet> petArrayList = response.body();
+                    
+
+                    ArrayAdapter<Pet> adapter = new ArrayAdapter<Pet>(PetLoginScreen.this, R.layout.list_text,R.id.textView2, petArrayList);
                     list.setAdapter(adapter);
+
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent itTimeline = new Intent(PetLoginScreen.this, TimelineScreen.class);
+                            startActivity(itTimeline);
                         }
                     });
 
@@ -75,7 +81,7 @@ public class PetLoginScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Object>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Pet>> call, Throwable t) {
                 Toast.makeText(PetLoginScreen.this, "erro", Toast.LENGTH_SHORT).show();
             }
         });

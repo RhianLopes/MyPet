@@ -23,5 +23,5 @@ public class Post extends Domain{
 
     private String description;
 
-        private LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 }

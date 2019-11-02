@@ -95,7 +95,6 @@ public class UserLoginScreenActivity extends AppCompatActivity implements Valida
 
     public void inicializeComponents(){
         this.tvLogo = findViewById(R.id.tv_logo);
-//        this.ivPaw = findViewById(R.id.iv_paw);
         this.tvEmail = findViewById(R.id.tv_email);
         this.etEmail = findViewById(R.id.et_email);
         this.tvPassword = findViewById(R.id.tv_password);
