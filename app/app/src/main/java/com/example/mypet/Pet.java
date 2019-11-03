@@ -1,17 +1,19 @@
 package com.example.mypet;
 
 
+import androidx.annotation.NonNull;
+
 public class Pet extends Domain {
 
     private User user;
 
     private String name;
 
-    private Specie specie;
+    private String specie;
 
     private String description;
 
-    private Genre genre;
+    private String genre;
 
     private String photo;
 
@@ -31,11 +33,11 @@ public class Pet extends Domain {
         this.name = name;
     }
 
-    public Specie getSpecie() {
+    public String getSpecie() {
         return specie;
     }
 
-    public void setSpecie(Specie specie) {
+    public void setSpecie(String specie) {
         this.specie = specie;
     }
 
@@ -47,11 +49,11 @@ public class Pet extends Domain {
         this.description = description;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
@@ -61,5 +63,11 @@ public class Pet extends Domain {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

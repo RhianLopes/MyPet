@@ -9,7 +9,7 @@ import org.springframework.security.core.parameters.P;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EnjoyRepository extends GenericRepository {
+public class EnjoyRepository<T> extends GenericRepository {
 
     private static final String TABLE = "enjoy";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, post_id, active) VALUES (NULL, ?, ?, 1)";
@@ -45,7 +45,7 @@ public class EnjoyRepository extends GenericRepository {
     }
 
     @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
+    protected T createObject(ResultSet resultSet) throws SQLException {
         Enjoy enjoy = new Enjoy();
         enjoy.setPet(new Pet());
         enjoy.setPost(new Post());
@@ -53,6 +53,6 @@ public class EnjoyRepository extends GenericRepository {
         enjoy.getPet().setId(resultSet.getLong("pet_id"));
         enjoy.getPost().setId(resultSet.getLong("post_id"));
         enjoy.setActive(resultSet.getBoolean("active"));
-        return enjoy;
+        return (T) enjoy;
     }
 }

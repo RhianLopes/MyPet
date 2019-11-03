@@ -2,7 +2,6 @@ package com.mypet.MyPet.repository;
 
 import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 import lombok.Setter;
 
 import java.sql.ResultSet;
@@ -10,11 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Setter
-public abstract class GenericRepository {
+public abstract class GenericRepository<T> {
 
-    protected abstract void setStatementValuesToInsert(PreparedStatement preparedStatement, Object object) throws SQLException;
-    protected abstract void setStatementValuesToUpdate(PreparedStatement preparedStatement, Object object) throws SQLException;
-    protected abstract Object createObject(ResultSet resultSet) throws SQLException;
+    protected abstract void setStatementValuesToInsert(PreparedStatement preparedStatement, T object) throws SQLException;
+    protected abstract void setStatementValuesToUpdate(PreparedStatement preparedStatement, T object) throws SQLException;
+    protected abstract <T> T createObject(ResultSet resultSet) throws SQLException;
 
     protected String table;
     private String insertSQL;
@@ -28,21 +27,21 @@ public abstract class GenericRepository {
         this.table = table;
     }
 
-    public Object insert(Object object) {
+    public T insert(T wow) {
         ConectionMySql.openConection();
         try {
             PreparedStatement preparedStatement = getPreparedStatement(insertSQL);
-            this.setStatementValuesToInsert(preparedStatement, object);
+            this.setStatementValuesToInsert(preparedStatement, wow);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             ConectionMySql.closeConection();
         }
-        return object;
+        return wow;
     }
 
-    public Object update(Object object) {
+    public T update(T object) {
         ConectionMySql.openConection();
         try {
             PreparedStatement preparedStatement = getPreparedStatement(this.updateSQL);
@@ -100,9 +99,9 @@ public abstract class GenericRepository {
         return objectResult;
     }
 
-    public ArrayList<Object> findAll() {
+        public ArrayList<T> findAll() {
         ConectionMySql.openConection();
-        ArrayList<Object> listObjectResult = new ArrayList<>();
+        ArrayList<T> listObjectResult = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = getPreparedStatement(selectAllSQL);
             ResultSet resultSet = preparedStatement.executeQuery();

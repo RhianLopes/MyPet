@@ -2,6 +2,7 @@ package com.mypet.MyPet.web.controller;
 
 import com.mypet.MyPet.domain.Post;
 import com.mypet.MyPet.repository.PostRepository;
+import javafx.geometry.Pos;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,8 @@ public class PostController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody Post post){
-        return postRepository.insert(post);
+    public Post insert(@RequestBody Post post){
+        return (Post) postRepository.insert(post);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,19 +34,19 @@ public class PostController {
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Object update(@RequestBody Post post){
-        return postRepository.update(post);
+    public Post update(@RequestBody Post post){
+        return (Post) postRepository.update(post);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findAll(){
+    public ArrayList<Post> findAll(){
         return postRepository.findAll();
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("id") Long id){
-        return postRepository.findById(id);
+    public Post find(@PathVariable("id") Long id){
+        return (Post) postRepository.findById(id);
     }
 }

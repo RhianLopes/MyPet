@@ -12,8 +12,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static com.example.mypet.R.layout.list_text;
 
 public class PetLoginScreen extends AppCompatActivity {
 
@@ -34,6 +39,7 @@ public class PetLoginScreen extends AppCompatActivity {
     private Retrofit retrofit;
     private SharedPreferences sharedPreferences;
     private String token;
+    private ArrayList<Pet> petList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +53,27 @@ public class PetLoginScreen extends AppCompatActivity {
 
         PetService petService = retrofit.create(PetService.class);
 
-        petService.findByUserId(token).enqueue(new Callback<ArrayList<Object>>() {
+        petService.findByUserId(token).enqueue(new Callback<ArrayList<Pet>>() {
 
             @Override
-            public void onResponse(Call<ArrayList<Object>> call, retrofit2.Response<ArrayList<Object>> response) {
+            public void onResponse(Call<ArrayList<Pet>> call, retrofit2.Response<ArrayList<Pet>> response) {
+
                 if(response.isSuccessful()){
                     Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
-                    ArrayList<Object> objectArrayList = response.body();
-                    ArrayList<String> petArrayList = new ArrayList<>();
-                    for (int i = 0; i<= objectArrayList.size(); i++){
-                        petArrayList.add(objectArrayList.get(i).toString());
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(PetLoginScreen.this, android.R.layout.simple_list_item_1, petArrayList);
+                    ArrayList<Pet> petArrayList = response.body();
+                    
+
+                    ArrayAdapter<Pet> adapter = new ArrayAdapter<Pet>(PetLoginScreen.this, R.layout.list_text,R.id.textView2, petArrayList);
                     list.setAdapter(adapter);
+
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent itTimeline = new Intent(PetLoginScreen.this, TimelineScreen.class);
+                            startActivity(itTimeline);
+                        }
+                    });
 
                 } else {
                     Toast.makeText(PetLoginScreen.this, "Error! Try again later!", Toast.LENGTH_SHORT).show();
@@ -67,11 +81,25 @@ public class PetLoginScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Object>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Pet>> call, Throwable t) {
                 Toast.makeText(PetLoginScreen.this, "erro", Toast.LENGTH_SHORT).show();
             }
         });
 
+        this.btAddPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itAddScreen = new Intent(PetLoginScreen.this, AddPetActivity.class);
+                startActivity(itAddScreen);
+            }
+        });
+        this.btEditUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itEdit = new Intent(PetLoginScreen.this, EditHumanUserActivity.class);
+                startActivity(itEdit);
+            }
+        });
 
 
 
@@ -100,10 +128,5 @@ public class PetLoginScreen extends AppCompatActivity {
 
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        Pet pet = new Pet();
-        return pet.getName();
-    }
+
 }

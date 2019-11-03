@@ -13,7 +13,7 @@ public class PublicUserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object insert(@RequestBody User user){
-        return userRepository.insert(user);
+    public User insert(@RequestBody User user){
+        return (User) userRepository.insert(user);
     }
 }

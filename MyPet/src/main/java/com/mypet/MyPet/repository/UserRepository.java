@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Setter
-public class UserRepository extends GenericRepository {
+public class UserRepository<T> extends GenericRepository {
 
     private static final String TABLE = "user";
     private static final String INSERT_SQL = "INSERT INTO %s (id, name, nickname, email, password, photo, active) VALUES (NULL, ?, ?, ?, ?, ?, 1)";
@@ -59,7 +59,7 @@ public class UserRepository extends GenericRepository {
     }
 
     @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
+    protected T createObject(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("id"));
         user.setActive(resultSet.getBoolean("active"));
@@ -68,12 +68,12 @@ public class UserRepository extends GenericRepository {
         user.setEmail(resultSet.getString("email"));
         user.setPhoto(resultSet.getString("photo"));
         user.setPassword(resultSet.getString("password"));
-        return user;
+        return (T) user;
     }
 
-    public Object findByEmail(String email) {
+    public T findByEmail(String email) {
         ConectionMySql.openConection();
-        Object objectResult = null;
+        T objectResult = null;
         try {
             PreparedStatement preparedStatement = getPreparedStatement(selectByEmailSql);
             preparedStatement.setString(1, email);

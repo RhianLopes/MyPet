@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private UserRepository userRepository = new UserRepository();
+    private UserRepository<User> userRepository = new UserRepository<User>();
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -30,19 +30,25 @@ public class UserController {
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Object update(@RequestBody User user){
-        return userRepository.update(user);
+    public User update(@RequestBody User user){
+        return (User) userRepository.update(user);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Object> findAll(){
+    public ArrayList<User> findAll(){
         return userRepository.findAll();
+    }
+
+    @GetMapping("/find-by-id")
+    @ResponseStatus(HttpStatus.OK)
+    public User find(@AuthenticationPrincipal UserPrincipal currentUser){
+        return (User) userRepository.findById(currentUser.getId());
     }
 
     @GetMapping("/find-by-email/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public Object find(@PathVariable("email") String email)   {
+    public User find(@PathVariable("email") String email)   {
         return userRepository.findByEmail(email);
     }
 }
