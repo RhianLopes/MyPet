@@ -1,4 +1,4 @@
-package com.mypet.MyPet.repository;
+package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.User;
 import com.mypet.MyPet.persistence.ConectionMySql;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Setter
-public class UserRepository<T> extends GenericRepository {
+public class UserDAO<T> extends GenericDAO {
 
     private static final String TABLE = "user";
     private static final String INSERT_SQL = "INSERT INTO %s (id, name, nickname, email, password, photo, active) VALUES (NULL, ?, ?, ?, ?, ?, 1)";
@@ -25,7 +25,7 @@ public class UserRepository<T> extends GenericRepository {
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 
-    public UserRepository() {
+    public UserDAO() {
         super(TABLE);
         super.setInsertSQL(String.format(INSERT_SQL, TABLE));
         super.setUpdateSQL(String.format(UPDATE_SQL, TABLE));

@@ -1,12 +1,11 @@
 package com.mypet.MyPet.security;
 
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.dao.UserDAO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +19,7 @@ import static java.util.Optional.ofNullable;
 @Component
 public class JwtTokenProvider {
 
-    UserRepository userRepository = new UserRepository();
+    UserDAO userRepository = new UserDAO();
 
     // cria token a partir de um usuário autenticado
     public String generateToken(Authentication authentication, String email) {

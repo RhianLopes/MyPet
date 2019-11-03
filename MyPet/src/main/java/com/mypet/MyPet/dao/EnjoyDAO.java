@@ -1,15 +1,14 @@
-package com.mypet.MyPet.repository;
+package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.Enjoy;
 import com.mypet.MyPet.domain.Pet;
 import com.mypet.MyPet.domain.Post;
 import com.mysql.jdbc.PreparedStatement;
-import org.springframework.security.core.parameters.P;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EnjoyRepository<T> extends GenericRepository {
+public class EnjoyDAO<T> extends GenericDAO {
 
     private static final String TABLE = "enjoy";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, post_id, active) VALUES (NULL, ?, ?, 1)";
@@ -19,7 +18,7 @@ public class EnjoyRepository<T> extends GenericRepository {
     private static final String SELECT_ALL_SQL = "SELECT * FROM %s WHERE active = 1";
     private static final String SELECT_ONE_SQL = "SELECT * FROM %s WHERE active = 1 AND id = ?";
 
-    public EnjoyRepository(){
+    public EnjoyDAO(){
         super(TABLE);
         super.setInsertSQL(String.format(INSERT_SQL, TABLE));
         super.setUpdateSQL(String.format(UPDATE_SQL, TABLE));

@@ -1,4 +1,4 @@
-package com.mypet.MyPet.repository;
+package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Setter
-public abstract class GenericRepository<T> {
+public abstract class GenericDAO<T> {
 
     protected abstract void setStatementValuesToInsert(PreparedStatement preparedStatement, T object) throws SQLException;
     protected abstract void setStatementValuesToUpdate(PreparedStatement preparedStatement, T object) throws SQLException;
@@ -23,7 +23,7 @@ public abstract class GenericRepository<T> {
     private String selectAllSQL;
     private String selectOneSQL;
 
-    GenericRepository(String table) {
+    GenericDAO(String table) {
         this.table = table;
     }
 

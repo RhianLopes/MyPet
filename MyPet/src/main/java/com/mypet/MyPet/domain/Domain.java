@@ -4,7 +4,7 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-public class Domain {
+public class Domain extends Object{
 
     private Long id;
 

@@ -10,7 +10,7 @@ public class ConectionMySql {
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/MyPet?autoReconnect=true&useSSL=false";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String LOGIN = "root";
-    private static final String PASSWORD = "toor";
+    private static final String PASSWORD = "passofundo";
     public static Connection connection;
 
     private ConectionMySql(){}

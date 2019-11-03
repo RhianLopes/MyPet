@@ -1,51 +1,53 @@
 package com.mypet.MyPet.web.controller;
 
-import com.mypet.MyPet.domain.Post;
+import com.mypet.MyPet.dao.FollowerDAO;
 import com.mypet.MyPet.dao.PostDAO;
+import com.mypet.MyPet.domain.Follower;
+import com.mypet.MyPet.domain.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api/post")
-public class PostController {
+@RequestMapping("/api/follower")
+public class FollowerController {
 
-    private PostDAO postDAO = new PostDAO();
+    private FollowerDAO followerDAO = new FollowerDAO();
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Post insert(@RequestBody Post post){
-        return (Post) postDAO.insert(post);
+    public Follower insert(@RequestBody Follower follower){
+        return (Follower) followerDAO.insert(follower);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void delete(@PathVariable("id") Long id){
-        postDAO.delete(id);
+        followerDAO.delete(id);
     }
 
     @PutMapping("/inactivate/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void inactivate(@PathVariable("id") Long id){
-        postDAO.inactivate(id);
+        followerDAO.inactivate(id);
     }
 
     @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Post update(@RequestBody Post post){
-        return (Post) postDAO.update(post);
+    public Follower update(@RequestBody Follower follower){
+        return (Follower) followerDAO.update(follower);
     }
 
     @GetMapping("/find-all")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<Post> findAll(){
-        return postDAO.findAll();
+    public ArrayList<Follower> findAll(){
+        return followerDAO.findAll();
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Post find(@PathVariable("id") Long id){
-        return (Post) postDAO.findById(id);
+    public Follower find(@PathVariable("id") Long id){
+        return (Follower) followerDAO.findById(id);
     }
 }

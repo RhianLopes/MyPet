@@ -1,4 +1,4 @@
-package com.mypet.MyPet.repository;
+package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.Comment;
 import com.mypet.MyPet.domain.Pet;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Data
-public class CommentRepository<T> extends GenericRepository {
+public class CommentDAO<T> extends GenericDAO {
 
     private static final String TABLE = "comment";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, post_id, content, date, active) VALUES (NULL, ?, ?, ?, ?, 1)";
@@ -26,7 +26,7 @@ public class CommentRepository<T> extends GenericRepository {
 
     private String selectByPostId;
 
-    public CommentRepository(){
+    public CommentDAO(){
         super(TABLE);
         super.setInsertSQL(String.format(INSERT_SQL, TABLE));
         super.setUpdateSQL(String.format(UPDATE_SQL, TABLE));

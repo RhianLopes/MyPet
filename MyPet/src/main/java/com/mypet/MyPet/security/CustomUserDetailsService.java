@@ -1,8 +1,7 @@
 package com.mypet.MyPet.security;
 
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mypet.MyPet.dao.UserDAO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +16,7 @@ import java.util.function.Supplier;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private UserDAO userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {

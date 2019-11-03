@@ -1,7 +1,7 @@
 package com.mypet.MyPet.web.controller;
 
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.dao.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/public/api/user")
 public class PublicUserController {
 
-    private UserRepository userRepository = new UserRepository();
+    private UserDAO userDAO = new UserDAO();
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public User insert(@RequestBody User user){
-        return (User) userRepository.insert(user);
+        return (User) userDAO.insert(user);
     }
 }

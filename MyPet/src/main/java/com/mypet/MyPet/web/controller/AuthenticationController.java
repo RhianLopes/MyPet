@@ -1,9 +1,10 @@
 package com.mypet.MyPet.web.controller;
 
-import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.dao.UserDAO;
 import com.mypet.MyPet.security.AuthenticationService;
 import com.mypet.MyPet.web.request.LoginRequest;
 import com.mypet.MyPet.web.response.LoginResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +14,10 @@ import javax.validation.Valid;
 @RequestMapping("/public/authentication")
 public class AuthenticationController {
 
-    private UserRepository userRepository = new UserRepository();
+    private UserDAO userDAO = new UserDAO();
 
-    private AuthenticationService authenticationService = new AuthenticationService();
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
@@ -28,6 +30,6 @@ public class AuthenticationController {
     @GetMapping("/verificacoes")
     @ResponseStatus(HttpStatus.OK)
     public boolean verificacao(@RequestParam("email") String email){
-        return userRepository.findByEmailExists(email);
+        return userDAO.findByEmailExists(email);
     }
 }

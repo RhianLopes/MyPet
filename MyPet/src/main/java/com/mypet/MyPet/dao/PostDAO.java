@@ -1,13 +1,12 @@
-package com.mypet.MyPet.repository;
+package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.*;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
-public class PostRepository<T> extends GenericRepository  {
+public class PostDAO<T> extends GenericDAO {
 
     private static final String TABLE = "post";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, photos, description, DATE, active) VALUES (NULL, ?, ?, ?, ?, 1)";
@@ -17,9 +16,9 @@ public class PostRepository<T> extends GenericRepository  {
     private static final String SELECT_ALL_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.active = 1";
     private static final String SELECT_ONE_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, COUNT(en.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id INNER JOIN enjoy en ON en.post_id = po.id WHERE po.id = ? AND po.active = 1";
 
-    private CommentRepository commentRepository = new CommentRepository();
+    private CommentDAO commentDAO = new CommentDAO();
 
-    public PostRepository(){
+    public PostDAO(){
         super(TABLE);
         super.setInsertSQL(String.format(INSERT_SQL, TABLE));
         super.setUpdateSQL(String.format(UPDATE_SQL, TABLE));

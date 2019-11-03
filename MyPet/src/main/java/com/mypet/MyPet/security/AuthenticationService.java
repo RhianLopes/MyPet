@@ -1,7 +1,7 @@
 package com.mypet.MyPet.security;
 
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.dao.UserDAO;
 import com.mypet.MyPet.web.response.LoginResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +22,7 @@ public class AuthenticationService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 
-    private UserRepository userRepository = new UserRepository();
+    private UserDAO userRepository = new UserDAO();
 
     public LoginResponse authenticate(String username, String password) {
 

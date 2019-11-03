@@ -1,7 +1,7 @@
 package com.mypet.MyPet.security;
 
 import com.mypet.MyPet.domain.User;
-import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    private UserRepository userRepository = new UserRepository();
+    private UserDAO userRepository = new UserDAO();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
