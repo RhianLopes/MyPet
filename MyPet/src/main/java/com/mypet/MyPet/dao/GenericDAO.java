@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 @Setter
@@ -14,6 +15,7 @@ public abstract class GenericDAO<T> {
     protected abstract void setStatementValuesToInsert(PreparedStatement preparedStatement, T object) throws SQLException;
     protected abstract void setStatementValuesToUpdate(PreparedStatement preparedStatement, T object) throws SQLException;
     protected abstract <T> T createObject(ResultSet resultSet) throws SQLException;
+    protected abstract <T> T prepareObjectToResponse(Long id, T object) throws SQLException;
 
     protected String table;
     private String insertSQL;
@@ -27,24 +29,28 @@ public abstract class GenericDAO<T> {
         this.table = table;
     }
 
-    public T insert(T wow) {
+    public T insert(T object) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = getPreparedStatement(insertSQL);
-            this.setStatementValuesToInsert(preparedStatement, wow);
+            PreparedStatement preparedStatement = (PreparedStatement) ConectionMySql.connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
+            this.setStatementValuesToInsert(preparedStatement, object);
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()){
+                object = this.prepareObjectToResponse(resultSet.getLong(1), object);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             ConectionMySql.closeConection();
         }
-        return wow;
+        return object;
     }
 
     public T update(T object) {
         ConectionMySql.openConection();
         try {
-            PreparedStatement preparedStatement = getPreparedStatement(this.updateSQL);
+            PreparedStatement preparedStatement = getPreparedStatement(updateSQL);
             this.setStatementValuesToUpdate(preparedStatement, object);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {

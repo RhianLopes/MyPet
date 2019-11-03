@@ -1,9 +1,6 @@
 package com.mypet.MyPet.dao;
 
-import com.mypet.MyPet.domain.Genre;
-import com.mypet.MyPet.domain.Pet;
-import com.mypet.MyPet.domain.Specie;
-import com.mypet.MyPet.domain.User;
+import com.mypet.MyPet.domain.*;
 import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -41,6 +38,14 @@ public class PetDAO<T> extends GenericDAO {
         preparedStatement.setString( 4, pet.getDescription());
         preparedStatement.setString(5, pet.getGenre().toString());
         preparedStatement.setString( 6, pet.getPhoto());
+    }
+
+    @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        Pet pet = (Pet) object;
+        pet.setId(id);
+        pet.setActive(true);
+        return (T) pet;
     }
 
     @Override

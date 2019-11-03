@@ -38,6 +38,14 @@ public class PostDAO<T> extends GenericDAO {
     }
 
     @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        Post post = (Post) object;
+        post.setId(id);
+        post.setActive(true);
+        return (T) post;
+    }
+
+    @Override
     protected void setStatementValuesToUpdate(PreparedStatement preparedStatement, Object object) throws SQLException {
         Post post = (Post) object;
         preparedStatement.setString(1, post.getDescription());

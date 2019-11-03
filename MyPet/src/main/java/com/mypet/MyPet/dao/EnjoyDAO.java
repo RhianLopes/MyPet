@@ -1,8 +1,6 @@
 package com.mypet.MyPet.dao;
 
-import com.mypet.MyPet.domain.Enjoy;
-import com.mypet.MyPet.domain.Pet;
-import com.mypet.MyPet.domain.Post;
+import com.mypet.MyPet.domain.*;
 import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.ResultSet;
@@ -34,6 +32,14 @@ public class EnjoyDAO<T> extends GenericDAO {
         Enjoy enjoy =  (Enjoy) object;
         preparedStatement.setLong(1, enjoy.getPet().getId());
         preparedStatement.setLong(2, enjoy.getPost().getId());
+    }
+
+    @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        Enjoy enjoy = (Enjoy) object;
+        enjoy.setId(id);
+        enjoy.setActive(true);
+        return (T) enjoy;
     }
 
     @Override

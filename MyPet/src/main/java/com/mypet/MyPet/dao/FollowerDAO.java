@@ -35,6 +35,14 @@ public class FollowerDAO<T> extends GenericDAO {
     }
 
     @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        Follower follower = (Follower) object;
+        follower.setId(id);
+        follower.setActive(true);
+        return (T) follower;
+    }
+
+    @Override
     protected void setStatementValuesToUpdate(PreparedStatement preparedStatement, Object object) throws SQLException {
         Follower follower = (Follower) object;
         preparedStatement.setBoolean(1, follower.isActive());

@@ -59,6 +59,14 @@ public class UserDAO<T> extends GenericDAO {
     }
 
     @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        User user = (User) object;
+        user.setId(id);
+        user.setActive(true);
+        return (T) user;
+    }
+
+    @Override
     protected T createObject(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("id"));

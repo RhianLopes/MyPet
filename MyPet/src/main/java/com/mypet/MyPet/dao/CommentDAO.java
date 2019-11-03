@@ -1,6 +1,7 @@
 package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.Comment;
+import com.mypet.MyPet.domain.Enjoy;
 import com.mypet.MyPet.domain.Pet;
 import com.mypet.MyPet.domain.Post;
 import com.mypet.MyPet.persistence.ConectionMySql;
@@ -44,6 +45,14 @@ public class CommentDAO<T> extends GenericDAO {
         preparedStatement.setLong(2, comment.getPost().getId());
         preparedStatement.setString(3, comment.getContent());
         preparedStatement.setObject( 4, LocalDateTime.now());
+    }
+
+    @Override
+    protected T prepareObjectToResponse(Long id, Object object) {
+        Comment comment = (Comment) object;
+        comment.setId(id);
+        comment.setActive(true);
+        return (T) comment;
     }
 
     @Override
