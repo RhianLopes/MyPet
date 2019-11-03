@@ -2,7 +2,9 @@ package com.mypet.MyPet.web.controller;
 
 import com.mypet.MyPet.domain.User;
 import com.mypet.MyPet.repository.UserRepository;
+import com.mypet.MyPet.security.UserPrincipal;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
