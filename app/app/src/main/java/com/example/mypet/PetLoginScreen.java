@@ -60,7 +60,7 @@ public class PetLoginScreen extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     Toast.makeText(PetLoginScreen.this, "Welcome to MyPet", Toast.LENGTH_SHORT).show();
-                    ArrayList<Pet> petArrayList = response.body();
+                    final ArrayList<Pet> petArrayList = response.body();
                     
 
                     ArrayAdapter<Pet> adapter = new ArrayAdapter<Pet>(PetLoginScreen.this, R.layout.list_text,R.id.textView2, petArrayList);
@@ -70,7 +70,9 @@ public class PetLoginScreen extends AppCompatActivity {
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Long idPet= petArrayList.get(position).getId();
                             Intent itTimeline = new Intent(PetLoginScreen.this, TimelineScreen.class);
+                            itTimeline.putExtra("id", idPet);
                             startActivity(itTimeline);
                         }
                     });

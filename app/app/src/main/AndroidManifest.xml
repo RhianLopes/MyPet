@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileScreen"></activity>
+        <activity android:name=".fragment.EditProfileFragment"></activity>
+        <activity android:name=".fragment.ProfileFragment" />
+        <activity android:name=".fragment.MenuFragment" />
+        <activity android:name=".fragmentprofile.ProfileFragment" />
+        <activity android:name=".fragmentprofile.PetProfile" />
+        <activity android:name=".PetProfileScreen" />
+        <activity android:name=".NewPostScreen" />
+        <activity android:name=".ProfileScreen" />
         <activity android:name=".EditHumanUserActivity" />
         <activity android:name=".AddPetActivity" />
         <activity android:name=".TimelineScreen" />

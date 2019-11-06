@@ -38,13 +38,14 @@ public class TimelineScreen extends AppCompatActivity {
     private Retrofit retrofit;
     private SharedPreferences sharedPreferences;
     private String token;
-
+    private Long idPet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_timeline_screen);
         this.incializeComponents();
 
+        idPet = getIntent().getLongExtra("id", 0);
 
         sharedPreferences = getApplicationContext().getSharedPreferences("MyPet", 0);
         token = sharedPreferences.getString("token", "erro");
@@ -73,12 +74,21 @@ public class TimelineScreen extends AppCompatActivity {
             }
         });
 
+        btAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itAddPost = new Intent (TimelineScreen.this, NewPostScreen.class);
+                itAddPost.putExtra("id", idPet);
+                startActivity(itAddPost);
+            }
+        });
+
 
 
     }
 
     private void incializeComponents(){
-        this.btAddPost = findViewById(R.id.bt_add_pet);
+        this.btAddPost = findViewById(R.id.bt_add_post);
         this.btEditPet = findViewById(R.id.bt_edit);
         this.recicleView = findViewById(R.id.recicleView);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
