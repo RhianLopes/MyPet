@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CE8F3"
-    tools:context=".AddPetActivity">
+    tools:context=".Activity.AddPetActivity">
 
     <TextView
         android:id="@+id/tv_logo"
@@ -146,6 +146,7 @@
         android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Add Pet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

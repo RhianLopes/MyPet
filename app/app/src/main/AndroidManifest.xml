@@ -9,21 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragment.EditProfileFragment"></activity>
+        <activity android:name=".Adapter.CommentAdapter"></activity>
+        <activity android:name=".Activity.CommentActivity" />
+        <activity android:name=".fragment.EditProfileFragment" />
         <activity android:name=".fragment.ProfileFragment" />
         <activity android:name=".fragment.MenuFragment" />
         <activity android:name=".fragmentprofile.ProfileFragment" />
         <activity android:name=".fragmentprofile.PetProfile" />
-        <activity android:name=".PetProfileScreen" />
-        <activity android:name=".NewPostScreen" />
-        <activity android:name=".ProfileScreen" />
-        <activity android:name=".EditHumanUserActivity" />
-        <activity android:name=".AddPetActivity" />
-        <activity android:name=".TimelineScreen" />
-        <activity android:name=".PetLoginScreen" />
-        <activity android:name=".UserLoginScreenActivity" />
-        <activity android:name=".SignUpScreenActivity" />
-        <activity android:name=".HomeScreenActivity">
+        <activity android:name=".Activity.NewPostActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.EditHumanUserActivity" />
+        <activity android:name=".Activity.AddPetActivity" />
+        <activity android:name=".Activity.TimelineActivity" />
+        <activity android:name=".Activity.PetLoginActivity" />
+        <activity android:name=".Activity.UserLoginActivity" />
+        <activity android:name=".Activity.SignUpActivity" />
+        <activity android:name=".Activity.HomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

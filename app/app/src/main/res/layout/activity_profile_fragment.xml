@@ -24,6 +24,7 @@
         android:layout_height="57dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Follower"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -34,12 +35,12 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="76dp"
         android:fontFamily="@font/baloo"
-        android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
@@ -49,6 +50,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Following"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -56,11 +58,10 @@
         app:layout_constraintTop_toBottomOf="@+id/bt_follower" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_description"
         android:layout_width="259dp"
         android:layout_height="140dp"
         android:layout_marginTop="36dp"
-        android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"

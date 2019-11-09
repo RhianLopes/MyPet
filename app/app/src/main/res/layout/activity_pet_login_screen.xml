@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CE8F3"
-    tools:context=".PetLoginScreen">
+    tools:context=".Activity.PetLoginActivity">
 
     <Button
         android:id="@+id/bt_edit_user"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Edit Human User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +29,7 @@
         android:layout_marginStart="62dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Add Pet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.029"

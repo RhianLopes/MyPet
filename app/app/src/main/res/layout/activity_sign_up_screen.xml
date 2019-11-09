@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CE8F3"
-    tools:context=".SignUpScreenActivity">
+    tools:context=".Activity.SignUpActivity">
 
     <Button
         android:id="@+id/bt_registrer"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

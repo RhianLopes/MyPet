@@ -18,6 +18,7 @@ public class MenuFragment extends AppCompatActivity {
     private ListView lvMenu;
     private String[] vetMenu = {"Yor profile", "Edit your profile"};
     private FragmentManager fm = getSupportFragmentManager();
+    private Long idPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,9 @@ public class MenuFragment extends AppCompatActivity {
 
         this.lvMenu = findViewById(R.id.lv_menu);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_text,R.id.textView2, vetMenu);
+        idPet = getIntent().getExtras().getLong("id");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_menu, R.id.textView, vetMenu);
         this.lvMenu.setAdapter(adapter);
 
         this.lvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,6 +42,8 @@ public class MenuFragment extends AppCompatActivity {
                     case 0:
                         frag = new ProfileFragment();
                         ft = fm.beginTransaction();
+                        b.putLong("id", idPet);
+                        frag.setArguments(b);
                         ft.addToBackStack(null);
                         ft.replace(R.id.linear_content, frag);
                         ft.commit();
@@ -47,9 +52,13 @@ public class MenuFragment extends AppCompatActivity {
                         frag = new EditProfileFragment();
                         ft = fm.beginTransaction();
                         ft.addToBackStack(null);
+                        b.putLong("id", idPet);
+                        frag.setArguments(b);
                         ft.replace(R.id.linear_content, frag);
                         ft.commit();
                         break;
+
+
 
                 }
             }

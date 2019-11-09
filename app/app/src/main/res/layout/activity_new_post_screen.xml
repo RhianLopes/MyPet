@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CE8F3"
-    tools:context=".NewPostScreen">
+    tools:context=".Activity.NewPostActivity">
 
     <TextView
         android:id="@+id/tv_logo"
@@ -61,6 +61,7 @@
         android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:background="@drawable/borda"
+        android:fontFamily="@font/baloo"
         android:text="Add Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
