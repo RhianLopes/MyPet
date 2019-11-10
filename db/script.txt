@@ -8,17 +8,6 @@ CREATE TABLE comment (
     PRIMARY KEY ( id )
 );
 
-CREATE TABLE event (
-    id      BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-    pet_id        BIGINT UNSIGNED NOT NULL,
-    name          VARCHAR(100) NOT NULL,
-    description   VARCHAR(280) NOT NULL,
-    latitude      DOUBLE NOT NULL,
-    longitude     DOUBLE NOT NULL,
-    active        BOOL NOT NULL,
-    PRIMARY KEY ( id )
-);
-
 CREATE TABLE follower (
     id    BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
     pet_follower   BIGINT UNSIGNED NOT NULL,
