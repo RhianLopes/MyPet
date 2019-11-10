@@ -87,7 +87,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    public Object findById(Long id) {
+    public T findById(Long id) {
         ConectionMySql.openConection();
         Object objectResult = null;
         try {
@@ -102,10 +102,10 @@ public abstract class GenericDAO<T> {
         } finally {
             ConectionMySql.closeConection();
         }
-        return objectResult;
+        return (T) objectResult;
     }
 
-        public ArrayList<T> findAll() {
+    public ArrayList<T> findAll() {
         ConectionMySql.openConection();
         ArrayList<T> listObjectResult = new ArrayList<>();
         try {

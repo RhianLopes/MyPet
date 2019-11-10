@@ -15,9 +15,9 @@ public class PetDAO<T> extends GenericDAO {
     private static final String UPDATE_SQL = "UPDATE %s SET name = ?, description = ?, photo = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1";
-    private static final String SELECT_ONE_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and p.id = ?";
-    private static final String SELECT_ALL_BY_USER_ID_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and u.id = ?";
+    private static final String SELECT_ALL_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo, (SELECT COUNT(fs.pet_followed) FROM follower fs WHERE p.id = fs.pet_followed AND fs.active = 1) as pet_followed, (SELECT COUNT(ff.pet_follower) FROM follower ff WHERE p.id = ff.pet_follower AND ff.active = 1) as pet_follower FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1";
+    private static final String SELECT_ONE_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo, (SELECT COUNT(fs.pet_followed) FROM follower fs WHERE p.id = fs.pet_followed AND fs.active = 1) as pet_followed, (SELECT COUNT(ff.pet_follower) FROM follower ff WHERE p.id = ff.pet_follower AND ff.active = 1) as pet_follower FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and p.id = ?";
+    private static final String SELECT_ALL_BY_USER_ID_SQL = "SELECT p.id, p.user_id, p.name, p.species, p.description, p.genre, p.photo, u.name as user_name, u.nickname, u.photo as user_photo, (SELECT COUNT(fs.pet_followed) FROM follower fs WHERE p.id = fs.pet_followed AND fs.active = 1) as pet_followed, (SELECT COUNT(ff.pet_follower) FROM follower ff WHERE p.id = ff.pet_follower AND ff.active = 1) as pet_follower FROM pet as p INNER JOIN user as u on p.user_id = u.id WHERE p.active = 1 and u.id = ?";
 
     public PetDAO(){
         super(TABLE);
@@ -64,13 +64,15 @@ public class PetDAO<T> extends GenericDAO {
         pet.setId(resultSet.getLong("id"));
         pet.getUser().setId(resultSet.getLong("user_id"));
         pet.setName(resultSet.getString("name"));
-        pet.setSpecie(Specie.valueOf(resultSet.getString("species")));
+        pet.setSpecie(resultSet.getString("species"));
         pet.setDescription(resultSet.getString("description"));
-        pet.setGenre(Genre.valueOf(resultSet.getString("genre")));
+        pet.setGenre(resultSet.getString("genre"));
         pet.setPhoto(resultSet.getString("photo"));
         pet.getUser().setName(resultSet.getString("user_name"));
         pet.getUser().setNickname(resultSet.getString("nickname"));
         pet.getUser().setPhoto(resultSet.getString("user_photo"));
+        pet.setFollower(resultSet.getLong("pet_follower"));
+        pet.setFollowed(resultSet.getLong("pet_followed"));
         return (T) pet;
     }
 

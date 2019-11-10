@@ -21,9 +21,9 @@ public class CommentDAO<T> extends GenericDAO {
     private static final String UPDATE_SQL = "UPDATE %s SET content = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM %s WHERE active = 1";
-    private static final String SELECT_ONE_SQL = "SELECT * FROM %s WHERE active = 1 AND id = ?";
-    private static final String SELECT_BY_POST_ID = "SELECT * FROM %s WHERE active = 1 AND post_id = ?";
+    private static final String SELECT_ALL_SQL = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1";
+    private static final String SELECT_ONE_SQL = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1 AND id = ?";
+    private static final String SELECT_BY_POST_ID = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1 AND post_id = ?";
 
     private String selectByPostId;
 
@@ -69,6 +69,7 @@ public class CommentDAO<T> extends GenericDAO {
         comment.setPost(new Post());
         comment.setId(resultSet.getLong("id"));
         comment.getPet().setId(resultSet.getLong("pet_id"));
+        comment.getPet().setName(resultSet.getString("pet_name"));
         comment.getPost().setId(resultSet.getLong("post_id"));
         comment.setContent(resultSet.getString("content"));
         comment.setDateTime(resultSet.getObject("date", LocalDateTime.class));

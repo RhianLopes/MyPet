@@ -13,11 +13,15 @@ public class Pet extends Domain {
 
     private String name;
 
-    private Specie specie;
+    private String specie;
 
     private String description;
 
-    private Genre genre;
+    private String genre;
 
     private String photo;
+
+    private Long follower;
+
+    private Long followed;
 }

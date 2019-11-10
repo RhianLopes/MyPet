@@ -48,4 +48,10 @@ public class EnjoyController {
     public Enjoy find(@PathVariable("id") Long id){
         return (Enjoy) enjoyDAO.findById(id);
     }
+
+    @GetMapping("/find-all-by-post/{postId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ArrayList<Enjoy> findAllByPost(@PathVariable("postId") Long postId){
+        return enjoyDAO.findAllByPost(postId);
+    }
 }

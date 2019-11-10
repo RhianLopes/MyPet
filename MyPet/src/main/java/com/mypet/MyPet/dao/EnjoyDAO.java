@@ -1,10 +1,12 @@
 package com.mypet.MyPet.dao;
 
 import com.mypet.MyPet.domain.*;
+import com.mypet.MyPet.persistence.ConectionMySql;
 import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EnjoyDAO<T> extends GenericDAO {
 
@@ -13,8 +15,9 @@ public class EnjoyDAO<T> extends GenericDAO {
     private static final String UPDATE_SQL = "UPDATE %s SET active = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0 WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM %s WHERE active = 1";
-    private static final String SELECT_ONE_SQL = "SELECT * FROM %s WHERE active = 1 AND id = ?";
+    private static final String SELECT_ALL_SQL = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1";
+    private static final String SELECT_ONE_SQL = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1 AND e.id = ?";
+    private static final String SELECT_ALL_BY_POST = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1 AND e.post_id = ?";
 
     public EnjoyDAO(){
         super(TABLE);
@@ -56,8 +59,27 @@ public class EnjoyDAO<T> extends GenericDAO {
         enjoy.setPost(new Post());
         enjoy.setId(resultSet.getLong("id"));
         enjoy.getPet().setId(resultSet.getLong("pet_id"));
+        enjoy.getPet().setName(resultSet.getString("name"));
         enjoy.getPost().setId(resultSet.getLong("post_id"));
         enjoy.setActive(resultSet.getBoolean("active"));
         return (T) enjoy;
+    }
+
+    public ArrayList<T> findAllByPost(Long postId) {
+        ConectionMySql.openConection();
+        ArrayList<T> listObjectResult = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = getPreparedStatement(SELECT_ALL_BY_POST);
+            preparedStatement.setLong(1, postId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                listObjectResult.add(this.createObject(resultSet));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConectionMySql.closeConection();
+        }
+        return listObjectResult;
     }
 }

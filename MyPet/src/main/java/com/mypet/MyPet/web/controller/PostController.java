@@ -48,4 +48,9 @@ public class PostController {
     public Post find(@PathVariable("id") Long id){
         return (Post) postDAO.findById(id);
     }
+
+    @GetMapping("/find-by-pet/{petId}")
+    public ArrayList<Post> findAllByPet(@PathVariable("petId") Long petId) {
+        return postDAO.findAllByPet(petId);
+    }
 }

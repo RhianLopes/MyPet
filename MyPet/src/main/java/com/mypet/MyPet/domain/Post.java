@@ -17,6 +17,8 @@ public class Post extends Domain{
 
     private ArrayList<Comment> comment;
 
+    private ArrayList<Enjoy> enjoys;
+
     private int amountEnjoy;
 
     private String photos;

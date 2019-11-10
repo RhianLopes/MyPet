@@ -50,4 +50,16 @@ public class FollowerController {
     public Follower find(@PathVariable("id") Long id){
         return (Follower) followerDAO.findById(id);
     }
+
+    @GetMapping("/find-all-by-follower/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ArrayList<Follower> findAllByFollower(@PathVariable("petId") Long petId){
+        return followerDAO.findAllByFollower(petId);
+    }
+
+    @GetMapping("/find-all-by-followed/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ArrayList<Follower> findAllByFollowed(@PathVariable("petId") Long petId){
+        return followerDAO.findAllByFollowed(petId);
+    }
 }
