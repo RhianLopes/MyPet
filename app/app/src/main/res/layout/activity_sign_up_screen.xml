@@ -27,6 +27,7 @@
         android:layout_width="359dp"
         android:layout_height="39dp"
         android:layout_marginStart="10sp"
+        android:layout_marginBottom="448dp"
         android:background="@drawable/borda_et"
         android:ems="10"
         android:hint="Name"
@@ -37,7 +38,7 @@
         android:textColorHint="#6F0A0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintVertical_bias="0.0" />

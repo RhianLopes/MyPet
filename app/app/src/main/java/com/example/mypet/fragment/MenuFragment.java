@@ -16,7 +16,7 @@ import com.example.mypet.R;
 public class MenuFragment extends AppCompatActivity {
 
     private ListView lvMenu;
-    private String[] vetMenu = {"Yor profile", "Edit your profile", "Delete post"};
+    private String[] vetMenu = {"Yor profile", "Edit your profile", "Delete post", "Back to timeline"};
     private FragmentManager fm = getSupportFragmentManager();
     private Long idPet;
 

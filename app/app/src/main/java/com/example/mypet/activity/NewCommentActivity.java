@@ -1,6 +1,7 @@
 package com.example.mypet.activity;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -68,6 +69,8 @@ public class NewCommentActivity extends AppCompatActivity {
                     public void onResponse(Call<Comment> call, retrofit2.Response<Comment> response) {
                         if(response.isSuccessful()){
                             Toast.makeText(NewCommentActivity.this, "New comment created", Toast.LENGTH_SHORT).show();
+                            Intent it = new Intent(NewCommentActivity.this, CommentActivity.class);
+                            startActivity(it);
 
                         }else{
                             Toast.makeText(NewCommentActivity.this, "Sorry, we had problems! Try again later.", Toast.LENGTH_SHORT).show();

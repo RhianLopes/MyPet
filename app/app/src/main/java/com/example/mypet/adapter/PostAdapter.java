@@ -139,7 +139,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         if(response.isSuccessful()){
                             holder.like.setText("Liked");
                             holder.numberLikes.setText(postArrayList.get(position).getAmountEnjoy()+ 1 + " likes");
-                            holder.numberLikes.setText(postArrayList.get(position).getAmountEnjoy() + " likes");
 
 
                         } else {
