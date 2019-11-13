@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mypet.Pet;
-import com.example.mypet.Services.PetService;
+import com.example.mypet.model.Pet;
+import com.example.mypet.PetService;
 import com.example.mypet.R;
 import com.mobsandgeeks.saripaar.Validator;
 import com.squareup.picasso.Picasso;
@@ -33,7 +33,6 @@ public class ProfileFragment extends Fragment {
     private Button btFollowers;
     private TextView tvDescription;
     private Retrofit retrofit;
-    private Validator validator;
     private SharedPreferences sharedPreferences;
     private String token;
     private Long petId;
@@ -47,7 +46,7 @@ public class ProfileFragment extends Fragment {
         inicilizeComponents();
 
         ivPhoto = v.findViewById(R.id.iv_photo);
-        tvName = v.findViewById(R.id.tv_name);
+        tvName = v.findViewById(R.id.pet_name);
         btFollowers = v.findViewById(R.id.bt_follower);
         btFollowing = v.findViewById(R.id.bt_following);
         tvDescription = v.findViewById(R.id.tv_description);

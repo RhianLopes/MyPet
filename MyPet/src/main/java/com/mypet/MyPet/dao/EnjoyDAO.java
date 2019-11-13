@@ -17,7 +17,7 @@ public class EnjoyDAO<T> extends GenericDAO {
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0 WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1";
     private static final String SELECT_ONE_SQL = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1 AND e.id = ?";
-    private static final String SELECT_ALL_BY_POST = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p WHERE e.active = 1 AND e.post_id = ?";
+    private static final String SELECT_ALL_BY_POST = "SELECT e.*, p.name FROM enjoy e INNER JOIN pet p ON p.id = e.pet_id WHERE e.active = 1 AND e.post_id = ?";
 
     public EnjoyDAO(){
         super(TABLE);

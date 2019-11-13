@@ -16,7 +16,7 @@ import com.example.mypet.R;
 public class MenuFragment extends AppCompatActivity {
 
     private ListView lvMenu;
-    private String[] vetMenu = {"Yor profile", "Edit your profile"};
+    private String[] vetMenu = {"Yor profile", "Edit your profile", "Delete post"};
     private FragmentManager fm = getSupportFragmentManager();
     private Long idPet;
 
@@ -50,6 +50,15 @@ public class MenuFragment extends AppCompatActivity {
                         break;
                     case 1:
                         frag = new EditProfileFragment();
+                        ft = fm.beginTransaction();
+                        ft.addToBackStack(null);
+                        b.putLong("id", idPet);
+                        frag.setArguments(b);
+                        ft.replace(R.id.linear_content, frag);
+                        ft.commit();
+                        break;
+                    case 2:
+                        frag = new DeletePostFragment();
                         ft = fm.beginTransaction();
                         ft.addToBackStack(null);
                         b.putLong("id", idPet);

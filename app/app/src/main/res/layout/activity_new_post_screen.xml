@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3CE8F3"
-    tools:context=".Activity.NewPostActivity">
+    tools:context=".activity.NewPostActivity">
 
     <TextView
         android:id="@+id/tv_logo"

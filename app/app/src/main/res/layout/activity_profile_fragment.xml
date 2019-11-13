@@ -11,62 +11,61 @@
         android:id="@+id/iv_photo"
         android:layout_width="179dp"
         android:layout_height="173dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="116dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars[2]" />
 
-    <Button
-        android:id="@+id/bt_follower"
-        android:layout_width="205dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/borda"
-        android:fontFamily="@font/baloo"
-        android:text="Follower"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/pet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/baloo"
         android:textColor="@android:color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
-
-    <Button
-        android:id="@+id/bt_following"
-        android:layout_width="218dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/borda"
-        android:fontFamily="@font/baloo"
-        android:text="Following"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_follower" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="259dp"
         android:layout_height="140dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginBottom="52dp"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_following"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/bt_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Follower"
+        android:background="@drawable/borda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pet_name" />
+
+    <Button
+        android:id="@+id/bt_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Following"
+        android:background="@drawable/borda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_follower" />
 </androidx.constraintlayout.widget.ConstraintLayout>

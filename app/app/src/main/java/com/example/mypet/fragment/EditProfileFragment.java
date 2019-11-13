@@ -19,8 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mypet.Pet;
-import com.example.mypet.Services.PetService;
+import com.example.mypet.model.Pet;
+import com.example.mypet.PetService;
 import com.example.mypet.R;
 
 public class EditProfileFragment extends Fragment {
