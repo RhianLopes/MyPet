@@ -26,7 +26,7 @@ public interface PostService {
     Call<Post> findById(@Path("id") Long id, @Header("Authorization") String authHeader);
 
     @GET("api/post/find-by-pet/{petId}")
-    Call<ArrayList<Post>> findAllByPetId(@Path("id") Long id, @Header("Authorization") String authHeader);
+    Call<ArrayList<Post>> findAllByPetId(@Path("petId") Long id, @Header("Authorization") String authHeader);
 
     @DELETE("api/post/delete/{id}")
     Call<Void> delete(@Path("id") Long id);

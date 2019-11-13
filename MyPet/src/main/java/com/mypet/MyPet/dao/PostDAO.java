@@ -13,11 +13,11 @@ public class PostDAO<T> extends GenericDAO {
     private static final String TABLE = "post";
     private static final String INSERT_SQL = "INSERT INTO %s (id, pet_id, photos, description, DATE, active) VALUES (NULL, ?, ?, ?, ?, 1)";
     private static final String UPDATE_SQL = "UPDATE %s SET description = ? WHERE id = ?";
-    private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ?";
+    private static final String DELETE_SQL = "DELETE FROM %s WHERE id = ? ";
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, (SELECT COUNT(en.id) FROM enjoy en WHERE en.post_id = po.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.active = 1";
     private static final String SELECT_ONE_SQL = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, (SELECT COUNT(en.id) FROM enjoy en WHERE en.post_id = po.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.id = ? AND po.active = 1";
-    private static final String SELECT_ALL_BY_PET = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, (SELECT COUNT(en.id) FROM enjoy en WHERE en.post_id = po.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.active = 1 AND pe.id = 1";
+    private static final String SELECT_ALL_BY_PET = "SELECT po.id as post_id, pe.id as pet_id, po.photos as post_photo, po.description as post_description, po.DATE, po.active as post_active, pe.user_id, pe.name, pe.species, pe.description as pet_description, pe.genre, pe.photo as pet_photo, pe.active as pet_active, (SELECT COUNT(en.id) FROM enjoy en WHERE en.post_id = po.id) as enjoys FROM post po INNER JOIN pet pe ON po.pet_id = pe.id WHERE po.active = 1 AND pe.id = ? ";
 
     private CommentDAO commentDAO = new CommentDAO();
     private EnjoyDAO enjoyDAO = new EnjoyDAO();

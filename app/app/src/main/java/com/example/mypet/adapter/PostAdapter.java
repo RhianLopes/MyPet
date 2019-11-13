@@ -138,6 +138,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     public void onResponse(Call<Enjoy> call, retrofit2.Response<Enjoy> response) {
                         if(response.isSuccessful()){
                             holder.like.setText("Liked");
+                            holder.numberLikes.setText(postArrayList.get(position).getAmountEnjoy()+ 1 + " likes");
                             holder.numberLikes.setText(postArrayList.get(position).getAmountEnjoy() + " likes");
 
 

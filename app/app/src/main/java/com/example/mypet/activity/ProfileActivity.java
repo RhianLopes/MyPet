@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         this.ivPhoto = findViewById(R.id.iv_photo);
         this.tvDescription = findViewById(R.id.tv_description);
-        this.tvName = findViewById(R.id.name);
+        this.tvName = findViewById(R.id.pet_name);
         this.btFollow = findViewById(R.id.bt_follow);
 
         retrofit = new Retrofit.Builder()

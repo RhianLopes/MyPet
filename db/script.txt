@@ -60,44 +60,32 @@ CREATE TABLE user (
 
 ALTER TABLE comment
     ADD CONSTRAINT comment_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( id ) ON DELETE CASCADE;
 
 ALTER TABLE comment
     ADD CONSTRAINT comment_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
-
-ALTER TABLE event
-    ADD CONSTRAINT event_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES post ( id ) ON DELETE CASCADE;
 
 ALTER TABLE follower
     ADD CONSTRAINT followed_pet_fk FOREIGN KEY ( pet_followed )
-        REFERENCES pet ( id );
+        REFERENCES pet ( id ) ON DELETE CASCADE;
 
 ALTER TABLE follower
     ADD CONSTRAINT follower_pet_fk FOREIGN KEY ( pet_follower )
-        REFERENCES pet ( id );
+        REFERENCES pet ( id ) ON DELETE CASCADE;
 
 ALTER TABLE enjoy
     ADD CONSTRAINT like_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( id ) ON DELETE CASCADE;
 
 ALTER TABLE enjoy
     ADD CONSTRAINT like_post_fk FOREIGN KEY ( post_id )
-        REFERENCES post ( id );
-
-ALTER TABLE notification
-    ADD CONSTRAINT notified_pet_fk FOREIGN KEY ( notified_pet_id )
-        REFERENCES pet ( id );
+        REFERENCES post ( id ) ON DELETE CASCADE;
 
 ALTER TABLE pet
     ADD CONSTRAINT pet_user_fk FOREIGN KEY ( user_id )
-        REFERENCES user ( id );
+        REFERENCES user ( id ) ON DELETE CASCADE;
 
 ALTER TABLE post
     ADD CONSTRAINT post_pet_fk FOREIGN KEY ( pet_id )
-        REFERENCES pet ( id );
-
-ALTER TABLE notification
-    ADD CONSTRAINT recived_pet_fk FOREIGN KEY ( recived_pet_id )
-        REFERENCES pet ( id );
+        REFERENCES pet ( id ) ON DELETE CASCADE;

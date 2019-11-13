@@ -55,7 +55,7 @@ public class PetPostAdapter extends RecyclerView.Adapter<PetPostAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pet_post_adapter, parent, false);
         return new ViewHolder(view);
     }
 

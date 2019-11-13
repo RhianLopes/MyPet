@@ -27,7 +27,7 @@ public class MenuFragment extends AppCompatActivity {
 
         this.lvMenu = findViewById(R.id.lv_menu);
 
-        idPet = getIntent().getExtras().getLong("id");
+        idPet = getIntent().getLongExtra("id", 0);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_menu, R.id.textView, vetMenu);
         this.lvMenu.setAdapter(adapter);
@@ -42,9 +42,9 @@ public class MenuFragment extends AppCompatActivity {
                     case 0:
                         frag = new ProfileFragment();
                         ft = fm.beginTransaction();
+                        ft.addToBackStack(null);
                         b.putLong("id", idPet);
                         frag.setArguments(b);
-                        ft.addToBackStack(null);
                         ft.replace(R.id.linear_content, frag);
                         ft.commit();
                         break;

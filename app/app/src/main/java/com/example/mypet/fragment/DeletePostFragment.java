@@ -39,28 +39,28 @@ public class DeletePostFragment extends Fragment {
     private Retrofit retrofit;
     private SharedPreferences sharedPreferences;
     private String token;
-    private Long idPet;
+    private Long petId;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_profile_fragment, null);
+        View v = inflater.inflate(R.layout.activity_delete_post_fragment, null);
 
         inicilizeComponents();
 
-        textInformation = v.findViewById(R.id.text_information);
-        rvPost = v.findViewById(R.id.rv_post);
+
+        rvPost = v.findViewById(R.id.posts);
 
         Bundle bundle = this.getArguments();
-        idPet = bundle.getLong("id");
+        petId = bundle.getLong("id");
 
         sharedPreferences = getActivity().getSharedPreferences("MyPet", 0);
         token = sharedPreferences.getString("token", "erro");
 
         PostService postService = retrofit.create(PostService.class);
 
-        postService.findAllByPetId(idPet, token).enqueue(new Callback<ArrayList<Post>>() {
+        postService.findAllByPetId(petId, token).enqueue(new Callback<ArrayList<Post>>() {
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(response.isSuccessful()){
@@ -69,9 +69,6 @@ public class DeletePostFragment extends Fragment {
                     rvPost.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rvPost.setAdapter(new PetPostAdapter(postArrayList, getActivity()));
 
-
-
-
                 } else {
                     Toast.makeText(getActivity(), "We had problems to loading posts, try again later!", Toast.LENGTH_SHORT).show();
                 }
@@ -79,7 +76,7 @@ public class DeletePostFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-
+                Toast.makeText(getActivity(), "try again later!", Toast.LENGTH_SHORT).show();
             }
         });
 
