@@ -1,0 +1,19 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /my-pet
+
+security:
+  jwt:
+    secret: "crescer-2019-1-java-jwt"
+    expiration: 864000000
+  public:
+    path: "/public/**"
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+
+data:
+  url: "jdbc:mysql://127.0.0.1:3306/MyPet?autoReconnect=true&useSSL=false"

@@ -1,3 +1,3 @@
 # MyPet
 Uma rede social onde os usuários podem se cadastrar e construir o perfil de seus Pets, onde cada Usuário poderá entrar no perfil de seu Pet e interagir com os Pets dos demais usuários. Podendo assim curtir, comentar, postar postagens etc...
-Projeto Integrador oi teste
+Projeto Integrador
