@@ -89,38 +89,8 @@ public class EditHumanUserActivity extends AppCompatActivity implements Validato
         this.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
-
-
                 btRegistrer_onClick(view);
-                User user = new User();
-                user.setName(etName.getText().toString());
-                user.setNickname(etNickname.getText().toString());
-                user.setEmail(etEmail.getText().toString());
-                user.setPassword(userPassword);
-                user.setPhoto(etPhoto.getText().toString());
-                user.setId(userId);
 
-                UserService userService = retrofit.create(UserService.class);
-
-                userService.update(user,token).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()){
-                            Toast.makeText(EditHumanUserActivity.this, "User successfully edited!", Toast.LENGTH_SHORT).show();
-                            Intent itPet = new Intent(EditHumanUserActivity.this, PetLoginActivity.class);
-                            startActivity(itPet);
-                            finish();
-                        }else{
-                            Toast.makeText(EditHumanUserActivity.this, "Error! We coudn't edit your profile, sorry!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(EditHumanUserActivity.this, "Sorry, we had internal problems! Try again later.", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
     }
@@ -152,7 +122,34 @@ public class EditHumanUserActivity extends AppCompatActivity implements Validato
 
     @Override
     public void onValidationSucceeded() {
+        User user = new User();
+        user.setName(etName.getText().toString());
+        user.setNickname(etNickname.getText().toString());
+        user.setEmail(etEmail.getText().toString());
+        user.setPassword(userPassword);
+        user.setPhoto(etPhoto.getText().toString());
+        user.setId(userId);
 
+        UserService userService = retrofit.create(UserService.class);
+
+        userService.update(user,token).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(EditHumanUserActivity.this, "User successfully edited!", Toast.LENGTH_SHORT).show();
+                    Intent itPet = new Intent(EditHumanUserActivity.this, PetLoginActivity.class);
+                    startActivity(itPet);
+                    finish();
+                }else{
+                    Toast.makeText(EditHumanUserActivity.this, "Error! We coudn't edit your profile, sorry! Try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(EditHumanUserActivity.this, "Sorry, we had internal problems! Try again later.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

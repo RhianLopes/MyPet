@@ -22,13 +22,19 @@ import android.widget.Toast;
 import com.example.mypet.model.Pet;
 import com.example.mypet.PetService;
 import com.example.mypet.R;
+import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 public class EditProfileFragment extends Fragment {
 
     private TextView tvLogo;
     private TextView tvPhoto;
     private TextView tvDescription;
+    @NotEmpty(message = "Required field")
+    @Length(max = 1000)
     private EditText etPhoto;
+    @NotEmpty(message = "Required field")
+    @Length(max = 280)
     private EditText etDescription;
     private Button btEditPet;
     private SharedPreferences sharedPreferences;

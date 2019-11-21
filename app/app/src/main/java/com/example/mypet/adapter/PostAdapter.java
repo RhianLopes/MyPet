@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.Interceptor;
@@ -72,10 +74,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent itProfile = new Intent(context, ProfileActivity.class);
-                Long idPet = postArrayList.get(position).getPet().getId();
-                itProfile.putExtra("id", idPet);
+                Long id = postArrayList.get(position).getPet().getId();
+                itProfile.putExtra("id", id);
+                itProfile.putExtra("idPet", idPet);
                 Bundle extras = itProfile.getExtras();
-                extras.putLong("id", idPet);
+                extras.putLong("id", id);
+                extras.putLong("idPet", idPet);
                 startActivity(context, itProfile, extras);
             }
         });
@@ -83,12 +87,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent itComment = new Intent(context, CommentActivity.class);
-                Long idPet = postArrayList.get(position).getPet().getId();
+                Long id = postArrayList.get(position).getPet().getId();
                 Long idPost = postArrayList.get(position).getId();
-                itComment.putExtra("id", idPet);
+                itComment.putExtra("id", id);
                 itComment.putExtra("idPost", idPost);
                 Bundle extras = itComment.getExtras();
-                extras.putLong("id", idPet);
+                extras.putLong("id", id);
                 extras.putLong("idPost", idPost);
                 startActivity(context, itComment, extras);
             }
@@ -155,6 +159,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
+
     }
 
     @Override

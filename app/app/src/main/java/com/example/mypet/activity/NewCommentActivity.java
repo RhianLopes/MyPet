@@ -69,7 +69,7 @@ public class NewCommentActivity extends AppCompatActivity {
                     public void onResponse(Call<Comment> call, retrofit2.Response<Comment> response) {
                         if(response.isSuccessful()){
                             Toast.makeText(NewCommentActivity.this, "New comment created", Toast.LENGTH_SHORT).show();
-                            Intent it = new Intent(NewCommentActivity.this, CommentActivity.class);
+                            Intent it = new Intent(NewCommentActivity.this, TimelineActivity.class);
                             startActivity(it);
 
                         }else{

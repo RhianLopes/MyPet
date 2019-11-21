@@ -29,7 +29,12 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/borda_et"
         android:ems="10"
+        android:hint="New comment"
         android:inputType="textPersonName"
+        android:padding="5sp"
+        android:paddingStart="15sp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#83000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_pet_name" />

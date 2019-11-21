@@ -52,7 +52,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView comment = itemView.findViewById(R.id.tv_comment);
+        private TextView comment = itemView.findViewById(R.id.tv_content);
         private TextView petname = itemView.findViewById(R.id.tv_pet_name);
 
 
