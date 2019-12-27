@@ -2,7 +2,7 @@
 
 No ano de 2019 eu, Rhian Lopes da Costa e Eduarda dos Santos, ambos alunos do técnico em informática no IFSul - campus Sapucaia do Sul, cursando o 2° ano do ensino médio. Desenvolvemos o Projeto Integrador, um projeto o qual procura fazer a junção de duas matérias do curso técnico, Linguagem de Programação 1 (LP1) e Banco de Dados 1 (BD1), ambas materias lecionadas pelo professor Rodrigo Remor. De maneira opcional, o mesmo professor proporciona um curso de Android durante o periodo inverso, onde a aluna Eduarda dos Santos participou do mesmo. 
 
-#MyPet
+# MyPet
 
 Em nosso projeto integrador, desenvolvemos o MyPet, uma rede social com a ideia que usuários entrem e possam cadastrar seus Pets e interagir por meio de Publicações, Curtidas e Comentários entre os demais Pets que também utilizam a rede social por meio da administração de seu dono que cuida da rede social de seu Pet.
 
