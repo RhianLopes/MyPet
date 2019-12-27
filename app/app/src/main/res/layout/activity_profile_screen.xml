@@ -11,14 +11,15 @@
         android:id="@+id/bt_follow"
         android:layout_width="216dp"
         android:layout_height="49dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/borda"
         android:fontFamily="@font/baloo"
-        android:text="Folow"
+        android:text="Follow"
+        android:onClick="@drawable/click"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pet_name" />
+        app:layout_constraintTop_toBottomOf="@+id/number_follower" />
 
     <ImageView
         android:id="@+id/iv_photo"
@@ -33,25 +34,37 @@
 
     <TextView
         android:id="@+id/pet_name"
-        android:layout_width="163dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/baloo"
         android:textColor="@android:color/black"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
     <TextView
         android:id="@+id/tv_description"
-        android:layout_width="275dp"
-        android:layout_height="179dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_follow"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_follow" />
+
+    <TextView
+        android:id="@+id/number_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pet_name" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

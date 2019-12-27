@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,11 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.mypet.R;
+import com.example.mypet.activity.TimelineActivity;
 
 public class MenuFragment extends AppCompatActivity {
 
     private ListView lvMenu;
-    private String[] vetMenu = {"Yor profile", "Edit your profile", "Delete post"};
+    private String[] vetMenu = {"Your profile", "Edit your profile", "Delete post", "Back to timeline"};
     private FragmentManager fm = getSupportFragmentManager();
     private Long idPet;
 
@@ -43,7 +45,7 @@ public class MenuFragment extends AppCompatActivity {
                         frag = new ProfileFragment();
                         ft = fm.beginTransaction();
                         ft.addToBackStack(null);
-                        b.putLong("id", idPet);
+                        b.putLong("idPet", idPet);
                         frag.setArguments(b);
                         ft.replace(R.id.linear_content, frag);
                         ft.commit();
@@ -66,8 +68,10 @@ public class MenuFragment extends AppCompatActivity {
                         ft.replace(R.id.linear_content, frag);
                         ft.commit();
                         break;
-
-
+                    case 3:
+                        Intent itBackTimeline = new Intent(MenuFragment.this, TimelineActivity.class);
+                        startActivity(itBackTimeline);
+                        finish();
 
                 }
             }

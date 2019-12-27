@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".adapter.PetPostAdapter"/>
+        <activity android:name=".adapter.FollowingAdapter"></activity>
+        <activity android:name=".activity.FollowingActivity" />
+        <activity android:name=".adapter.FollowerAdapter" />
+        <activity android:name=".activity.FollowerActivity" />
+        <activity android:name=".adapter.PetPostAdapter" />
         <activity android:name=".fragment.DeletePostFragment" />
         <activity android:name=".adapter.EnjoyAdapter" />
         <activity android:name=".activity.ListLikesActivity" />

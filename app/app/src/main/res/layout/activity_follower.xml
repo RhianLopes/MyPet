@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A5EAEE"
-    tools:context=".fragment.DeletePostFragment">
+    tools:context=".activity.FollowerActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/posts"
-        android:layout_width="362dp"
-        android:layout_height="690dp"
-        android:clickable="false"
+        android:id="@+id/rv_follower"
+        android:layout_width="389dp"
+        android:layout_height="686dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.644" />
 </androidx.constraintlayout.widget.ConstraintLayout>

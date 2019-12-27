@@ -17,6 +17,10 @@ public class Pet extends Domain {
 
     private String photo;
 
+    private Long follower;
+
+    private Long followed;
+
     public User getUser() {
         return user;
     }
@@ -63,6 +67,22 @@ public class Pet extends Domain {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Long getFollower() {
+        return follower;
+    }
+
+    public void setFollower(Long follower) {
+        this.follower = follower;
+    }
+
+    public Long getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Long followed) {
+        this.followed = followed;
     }
 
     @NonNull

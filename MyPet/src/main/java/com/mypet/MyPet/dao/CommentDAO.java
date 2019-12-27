@@ -23,7 +23,7 @@ public class CommentDAO<T> extends GenericDAO {
     private static final String INACTIVATE_SQL = "UPDATE %s SET active = 0  WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1";
     private static final String SELECT_ONE_SQL = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1 AND id = ?";
-    private static final String SELECT_BY_POST_ID = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p WHERE c.active = 1 AND post_id = ?";
+    private static final String SELECT_BY_POST_ID = "SELECT c.*, p.name as pet_name FROM %s c INNER JOIN pet p ON p.id = c.pet_id WHERE c.active = 1 AND c.post_id = ?";
 
     private String selectByPostId;
 

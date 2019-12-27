@@ -22,18 +22,17 @@ import com.example.mypet.R;
 import com.example.mypet.PostService;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.util.List;
 
-public class NewPostActivity extends AppCompatActivity implements Validator.ValidationListener {
+public class NewPostActivity extends AppCompatActivity {
 
     private TextView tvLogo;
     private TextView tvPhoto;
     private TextView tvDescription;
-    @NotEmpty
     private EditText etPhoto;
-    @NotEmpty
     private EditText etDescription;
     private Button btAddPost;
     private Validator validator;
@@ -41,7 +40,7 @@ public class NewPostActivity extends AppCompatActivity implements Validator.Vali
     private SharedPreferences sharedPreferences;
     private String token;
     private Long idPet;
-    private Pet pet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +99,6 @@ public class NewPostActivity extends AppCompatActivity implements Validator.Vali
         this.etDescription = findViewById(R.id.et_description);
         this.btAddPost = findViewById(R.id.bt_add_post);
 
-        this.validator = new Validator(this);
-        this.validator.setValidationListener(NewPostActivity.this);
-
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8000/my-pet/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -112,33 +108,5 @@ public class NewPostActivity extends AppCompatActivity implements Validator.Vali
 
     }
 
-    private void btLogin_onClick(View view){
-        validator.validate();
-    }
 
-
-
-
-    public void onValidationSucceeded() {
-
-    }
-
-
-    public void onValidationFailed(List<ValidationError> errors) {
-        for (ValidationError error: errors){
-            View component = error.getView();
-            String errorMessage = error.getCollatedErrorMessage(this);
-            if (component instanceof EditText){
-                ((TextView) component).setError(errorMessage);
-            }
-        }
-        Toast.makeText(this, "Error! Check the fields.", Toast.LENGTH_SHORT).show();
-
-    }
-
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

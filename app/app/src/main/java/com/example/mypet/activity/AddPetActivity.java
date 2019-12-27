@@ -23,21 +23,29 @@ import com.example.mypet.model.Pet;
 import com.example.mypet.R;
 import com.example.mypet.PetService;
 import com.example.mypet.model.Specie;
+import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 public class AddPetActivity extends AppCompatActivity {
 
     private TextView tvLogo;
     private TextView tvName;
+    @NotEmpty(message = "Required field")
+    @Length(max = 50)
     private EditText etName;
     private TextView tvSpecie;
     private RadioGroup rgSpecie;
     private RadioButton rbSelectedSpecie;
     private TextView tvDescription;
+    @NotEmpty(message = "Required field")
+    @Length(max = 280)
     private EditText etDescription;
     private TextView tvGenre;
     private RadioGroup rgGenre;
     private RadioButton rbSelectedGenre;
     private TextView tvPhoto;
+    @NotEmpty(message = "Required field")
+    @Length(max = 1000)
     private EditText etPhoto;
     private Button btAddPet;
     private Retrofit retrofit;
