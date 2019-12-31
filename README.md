@@ -6,11 +6,19 @@ No ano de 2019 eu, Rhian Lopes da Costa e Eduarda dos Santos, ambos alunos do t�
 
 Em nosso projeto integrador, desenvolvemos o MyPet, uma rede social com a ideia que usuários entrem e possam cadastrar seus Pets e interagir por meio de Publicações, Curtidas e Comentários entre os demais Pets que também utilizam a rede social por meio da administração de seu dono que cuida da rede social de seu Pet.
 
-## 🧪 Tecnologias
+## 🔥 Tecnologias
 
 Na matéria de LP1, nos foi ensinado Orientação a Objetos na Linguagem Java, que é a linguagem de maior foco no decorrer do curso técnico, com ela foi construida a api. Já na matéria de BD1, foi nos ensinado SQL por meio do banco de dados MySQL. Para a persistencia de dados entre BD e API, foi usado o JDBC, ensinado em aula para maior compreensão da maneira a qual é persistida os dados entre BD e API, usando Querys e entendendo como persistir os dados. De maneira opcional, foi desenvolvido o Client em Android Java ensinado no curso no horário inverso ao de aula.
 
 Na API foi utilizado o Spring com suas demais ramificações, como Spring Boot, Spring Security, Spring Web Services e por fim o Lombok para facilitação da criação de código, foi construido o pacote de controllers com os Web Services, seguindo o Padrão MVC. Não foi permitido o uso de Spring Data, pois, como a ideia era desenvolver com o JDBC para maior compreesão do real sentido e aprendizado das Querys e persistência de dados no banco de dados MySQL. Sem poder utilizar recursos do Spring Data, foi desenvolvido um serviço genérico com um CRUD para qualquer entidade do banco.
+
+- Java
+- JDBC
+- Spring Boot
+- Spring Security
+- Android
+- Android Studio
+- MySQL
 
 ## 💻 Sobre o Desenvolvimento
 
